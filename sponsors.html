@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Responsive Navbar</title>
+
+  <!-- Internal CSS -->
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: Arial, sans-serif;
+    }
+
+    body {
+      background: #161212f0;
+    }
+
+    nav {
+      width: 100%;
+      background: #fff;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: 1000;
+    }
+
+    .navbar-container {
+      max-width: 1200px;
+      margin: auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 12px 20px;
+    }
+
+    /* Logo */
+    .logo {
+      display: flex;
+      align-items: center;
+    }
+    .logo img {
+      height: 40px;
+      width: 40px;
+      border-radius: 50%;
+      margin-right: 8px;
+    }
+    .logo span {
+      font-size: 1.2rem;
+      font-weight: bold;
+      color: #333;
+    }
+
+    /* Menu */
+    .menu {
+      display: flex;
+      align-items: center;
+      list-style: none;
+      gap: 20px;
+    }
+
+    .menu li {
+      position: relative;
+    }
+
+    .menu a {
+      text-decoration: none;
+      color: #333;
+      font-size: 1rem;
+      transition: 0.3s;
+    }
+
+    .menu a:hover {
+      color: #007bff;
+    }
+
+    /* Dropdown */
+    .dropdown {
+      position: relative;
+    }
+
+    .dropdown-content {
+      display: none;
+      position: absolute;
+      top: 100%;
+      left: 0;
+      background: #fff;
+      min-width: 150px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+      border-radius: 4px;
+    }
+
+    .dropdown-content a {
+      display: block;
+      padding: 10px;
+      font-size: 0.95rem;
+      color: #333;
+    }
+
+    .dropdown-content a:hover {
+      background: #f0f0f0;
+    }
+
+    .dropdown:hover .dropdown-content {
+      display: block;
+    }
+
+    /* Register Button */
+    .register-btn {
+      margin-left: 20px;
+      padding: 8px 16px;
+      background: #007bff;
+      color: #fff;
+      border: none;
+      border-radius: 20px;
+      cursor: pointer;
+      font-size: 0.95rem;
+      transition: 0.3s;
+    }
+    .register-btn:hover {
+      background: #0056b3;
+    }
+
+    /* Hamburger */
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      cursor: pointer;
+      gap: 5px;
+    }
+
+    .hamburger div {
+      width: 25px;
+      height: 3px;
+      background: #333;
+    }
+
+    /* Mobile Menu */
+    @media (max-width: 768px) {
+      .menu {
+        display: none;
+        flex-direction: column;
+        background: #fff;
+        position: absolute;
+        top: 60px;
+        right: 20px;
+        width: 200px;
+        border-radius: 6px;
+        box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+        padding: 10px;
+      }
+      .menu li {
+        margin: 10px 0;
+      }
+      .hamburger {
+        display: flex;
+      }
+      .menu.active {
+        display: flex;
+      }
+      .dropdown-content {
+        position: static;
+        box-shadow: none;
+        border-radius: 0;
+      }
+    }
+/* Space for navbar */
+    .navbar-space {
+      height: 80px; /* Adjust to your navbar height */
+    }
+
+    h2 {
+      text-align: center;
+      font-size: 2rem;
+      margin-bottom: 20px;
+      text-shadow: 2px 2px 10px rgba(0,0,0,0.6);
+    }
+
+    /* Slider container */
+    .slider {
+      position: relative;
+      overflow: hidden;
+      width: 100%;
+      padding: 20px;
+    }
+
+    .slide-track {
+      display: flex;
+      gap: 20px;
+      animation: scroll 25s linear infinite;
+    }
+
+    .card {
+      flex: 0 0 auto;
+      width: 250px;
+      background: #1e1e1e;
+      border-radius: 15px;
+      text-align: center;
+      padding: 20px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+      transition: transform 0.3s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-10px);
+    }
+
+    .card img {
+      width: 100%;
+      height: 150px;
+      object-fit: cover;
+      border-radius: 10px;
+      margin-bottom: 15px;
+    }
+
+    .card h3 {
+      font-size: 1.2rem;
+      color: #ffcc00;
+    }
+
+    /* Infinite scroll effect */
+    @keyframes scroll {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .card {
+        width: 200px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .card {
+        width: 150px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navbar -->
+  <nav>
+    <div class="navbar-container">
+      <!-- Logo -->
+      <div class="logo">
+        <img src="logo.png" alt="Logo">
+        <span>Alumni</span>
+      </div>
+
+      <!-- Menu -->
+      <ul class="menu" id="menu">
+        <li><a href="home.html">Home</a></li>
+
+        <li class="dropdown">
+          <a href="#">About ▼</a>
+          <div class="dropdown-content">
+            <a href="about-alumni.html">About Alumni</a>
+            <a href="about-us.html">Our Team</a>
+          </div>
+        </li>
+
+        <li><a href="events.html">Events</a></li>
+        <li><a href="schedule.html">Schedule</a></li>
+        <li><a href="sponsors.html">Sponsors</a></li>
+        <li><a href="gallery.html">Gallery</a></li>
+        <li><a href="contact.html">Contact</a></li>
+
+        <li>
+          <button class="register-btn">Register</button>
+        </li>
+      </ul>
+
+      <!-- Hamburger -->
+      <div class="hamburger" id="hamburger">
+        <div></div>
+        <div></div>
+        <div></div>
+      </div>
+    </div>
+  </nav>
+
+<div class="navbar-space"></div>
+
+  <h2>Sponsors of the Event</h2>
+
+  <div class="slider">
+    <div class="slide-track">
+      <!-- Sponsor Cards -->
+      <div class="card">
+        <img src="https://via.placeholder.com/250x150" alt="Sponsor 1">
+        <h3>Sponsor 1</h3>
+      </div>
+      <div class="card">
+        <img src="https://via.placeholder.com/250x150" alt="Sponsor 2">
+        <h3>Sponsor 2</h3>
+      </div>
+      <div class="card">
+        <img src="https://via.placeholder.com/250x150" alt="Sponsor 3">
+        <h3>Sponsor 3</h3>
+      </div>
+      <div class="card">
+        <img src="https://via.placeholder.com/250x150" alt="Sponsor 4">
+        <h3>Sponsor 4</h3>
+      </div>
+      <div class="card">
+        <img src="https://via.placeholder.com/250x150" alt="Sponsor 5">
+        <h3>Sponsor 5</h3>
+      </div>
+      <div class="card">
+        <img src="https://via.placeholder.com/250x150" alt="Sponsor 6">
+        <h3>Sponsor 6</h3>
+      </div>
+
+      <!-- Duplicate set for smooth infinite scroll -->
+      <div class="card">
+        <img src="https://via.placeholder.com/250x150" alt="Sponsor 1">
+        <h3>Sponsor 1</h3>
+      </div>
+      <div class="card">
+        <img src="https://via.placeholder.com/250x150" alt="Sponsor 2">
+        <h3>Sponsor 2</h3>
+      </div>
+      <div class="card">
+        <img src="https://via.placeholder.com/250x150" alt="Sponsor 3">
+        <h3>Sponsor 3</h3>
+      </div>
+      <div class="card">
+        <img src="https://via.placeholder.com/250x150" alt="Sponsor 4">
+        <h3>Sponsor 4</h3>
+      </div>
+      <div class="card">
+        <img src="https://via.placeholder.com/250x150" alt="Sponsor 5">
+        <h3>Sponsor 5</h3>
+      </div>
+      <div class="card">
+        <img src="https://via.placeholder.com/250x150" alt="Sponsor 6">
+        <h3>Sponsor 6</h3>
+      </div>
+    </div>
+  </div>
+
+  <!-- JS for toggle -->
+  <script>
+    const hamburger = document.getElementById('hamburger');
+    const menu = document.getElementById('menu');
+
+    hamburger.addEventListener('click', () => {
+      menu.classList.toggle('active');
+    });
+  </script>
+
+</body>
+</html>
