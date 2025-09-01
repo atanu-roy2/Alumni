@@ -1,85 +1,97 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Responsive Navbar</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>About Alumni - GVHS</title>
 
-  <!-- Internal CSS -->
+  <!-- FontAwesome for social icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
   <style>
     * {
       margin: 0;
       padding: 0;
       box-sizing: border-box;
-      font-family: Arial, sans-serif;
+    }
+
+    :root {
+      --bg: #0b0b0d;
+      --bg-2:#0f0f14;
+      --card:#121218;
+      --text:#f4f6f8;
+      --muted:#a6adbb;
+      --brand:#e11d48;
+      --brand-2:#fb7185;
+      --ring: 0 0 0 3px rgba(225,29,72,.35);
+      --radius: 1.25rem;
+      --shadow: 0 10px 30px rgba(0,0,0,.35);
+      --max: 1200px;
     }
 
     body {
-      background: #f5f5f5;
+      font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      background: radial-gradient(1200px 600px at 80% -10%, rgba(225,29,72,.08), transparent 60%),
+                  radial-gradient(1000px 500px at 10% -20%, rgba(251,113,133,.06), transparent 60%),
+                  var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      scroll-behavior: smooth;
     }
 
+    a { color: inherit; text-decoration: none }
+
+    .container {
+      max-width: var(--max);
+      margin-inline: auto;
+      padding: clamp(16px, 2vw, 28px);
+    }
+
+    /* Navbar */
     nav {
-      width: 100%;
-      background: #fff;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
-      position: fixed;
-      top: 0;
-      left: 0;
-      z-index: 1000;
-    }
-
-    .navbar-container {
-      max-width: 1200px;
-      margin: auto;
       display: flex;
-      align-items: center;
       justify-content: space-between;
-      padding: 12px 20px;
+      align-items: center;
+      background: #1a1a1a;
+      padding: 9px 10px;
+      position: sticky;
+      top: 0;
+      z-index: 100;
     }
 
-    /* Logo */
     .logo {
       display: flex;
       align-items: center;
-    }
-    .logo img {
-      height: 40px;
-      width: 40px;
-      border-radius: 50%;
-      margin-right: 8px;
-    }
-    .logo span {
+      color: white;
       font-size: 1.2rem;
       font-weight: bold;
-      color: #333;
     }
 
-    /* Menu */
-    .menu {
+    .logo img {
+      height: 40px;
+      margin-right: 10px;
+      filter: brightness(25) saturate(20);
+    }
+
+    .nav-links {
       display: flex;
       align-items: center;
       list-style: none;
-      gap: 20px;
     }
 
-    .menu li {
-      position: relative;
+    .nav-links li { position: relative; }
+
+    .nav-links a {
+      color: white;
+      padding: 10px 15px;
+      font-weight: 700;
+      transition: background 0.3s;
+      display: block;
     }
 
-    .menu a {
-      text-decoration: none;
-      color: #333;
-      font-size: 1rem;
-      transition: 0.3s;
-    }
-
-    .menu a:hover {
-      color: #007bff;
-    }
-
-    /* Dropdown */
-    .dropdown {
-      position: relative;
+    .nav-links a:hover {
+      background: #333;
+      border-radius: 5px;
     }
 
     .dropdown-content {
@@ -87,140 +99,426 @@
       position: absolute;
       top: 100%;
       left: 0;
-      background: #fff;
-      min-width: 150px;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.15);
-      border-radius: 4px;
+      background: #222;
+      min-width: 160px;
+      border-radius: 5px;
+      z-index: 10;
     }
 
-    .dropdown-content a {
-      display: block;
-      padding: 10px;
-      font-size: 0.95rem;
-      color: #333;
-    }
+    .dropdown-content a { padding: 10px 15px; }
 
-    .dropdown-content a:hover {
-      background: #f0f0f0;
-    }
+    .nav-links li:hover .dropdown-content { display: block; }
 
-    .dropdown:hover .dropdown-content {
-      display: block;
-    }
-
-    /* Register Button */
-    .register-btn {
-      margin-left: 20px;
-      padding: 8px 16px;
-      background: #007bff;
-      color: #fff;
+    .login-btn {
+      background: #ff6600;
+      color: white;
+      padding: 8px 18px;
       border: none;
-      border-radius: 20px;
+      font-size: medium;
+      font-weight: 900;
+      border-radius: 5px;
       cursor: pointer;
-      font-size: 0.95rem;
-      transition: 0.3s;
-    }
-    .register-btn:hover {
-      background: #0056b3;
+      margin-left: 40px;
+      transition: background 0.3s;
     }
 
-    /* Hamburger */
+    .login-btn:hover { background: #e55b00; }
+
     .hamburger {
       display: none;
       flex-direction: column;
       cursor: pointer;
-      gap: 5px;
     }
 
-    .hamburger div {
-      width: 25px;
+    .hamburger span {
       height: 3px;
-      background: #333;
+      width: 25px;
+      background: white;
+      margin: 4px 0;
+      border-radius: 3px;
     }
 
-    /* Mobile Menu */
     @media (max-width: 768px) {
-      .menu {
-        display: none;
-        flex-direction: column;
-        background: #fff;
+      .nav-links {
         position: absolute;
         top: 60px;
-        right: 20px;
+        right: 0;
+        background: #1a1a1a;
+        flex-direction: column;
         width: 200px;
-        border-radius: 6px;
-        box-shadow: 0 2px 6px rgba(0,0,0,0.2);
-        padding: 10px;
+        display: none;
       }
-      .menu li {
-        margin: 10px 0;
-      }
-      .hamburger {
-        display: flex;
-      }
-      .menu.active {
-        display: flex;
-      }
-      .dropdown-content {
-        position: static;
-        box-shadow: none;
-        border-radius: 0;
-      }
+      .nav-links.active { display: flex; }
+      .login-btn { margin: 10px 0 0; }
+      .hamburger { display: flex; }
+    }
+
+    /* Hero, sections, animations (same as your first code) */
+    .hero { position: relative; overflow: hidden; }
+    .hero .container {
+      display: grid;
+      grid-template-columns: 1.2fr .8fr;
+      gap: clamp(20px, 4vw, 48px);
+      align-items: center;
+      min-height: 68vh;
+    }
+
+    .tag {
+      display: inline-flex;
+      gap: 8px;
+      padding: 6px 10px;
+      border-radius: 999px;
+      background: rgba(225,29,72,.12);
+      border: 1px solid rgba(225,29,72,.35);
+    }
+
+    .headline { font-size: clamp(28px, 4.6vw, 54px); font-weight: 900; }
+
+    .hero-visual {
+      position: relative;
+      aspect-ratio: 1/1;
+      border-radius: 28px;
+      background: linear-gradient(160deg, rgba(238, 231, 233, 0.15), rgb(233, 227, 228));
+      border:1px solid rgba(231, 220, 220, 0.08);
+      box-shadow: var(--shadow);
+    }
+
+    .orb {
+      position: absolute;
+      inset: auto auto -15% -15%;
+      width: 60%;
+      aspect-ratio: 1/1;
+      border-radius: 50%;
+      background: radial-gradient(circle at 30% 30%, rgba(251,113,133,.55), rgba(225,29,72,.2) 60%, transparent 70%);
+      filter: blur(12px);
+      animation: float 8s ease-in-out infinite;
+    }
+
+    @keyframes float { 0%,100% { transform: translateY(0) } 50% { transform: translateY(-12px) } }
+
+    section { padding: clamp(36px, 6vw, 96px) 0; }
+    .section-title { font-size: clamp(22px, 3.2vw, 36px); font-weight: 800; }
+    .section-sub { color: var(--muted); }
+
+    /* Reveal animations */
+    .reveal { opacity:0; transform: translateY(24px) scale(.98); transition: .8s; }
+    .reveal.in-view { opacity:1; transform: none; }
+
+    .reveal-stagger > * { opacity:0; transform: translateY(18px); transition: .7s; }
+    .reveal-stagger.in-view > * { opacity:1; transform: none; }
+    .reveal-stagger.in-view > *:nth-child(1){ transition-delay:.05s }
+    .reveal-stagger.in-view > *:nth-child(2){ transition-delay:.12s }
+    .reveal-stagger.in-view > *:nth-child(3){ transition-delay:.19s }
+    .reveal-stagger.in-view > *:nth-child(4){ transition-delay:.26s }
+
+        section {
+      padding: 60px 20px;
+    }
+    .container {
+      max-width: 1100px;
+      margin: auto;
+    }
+    .section-title {
+      font-size: 2rem;
+      text-align: center;
+      margin-bottom: 40px;
+      font-weight: bold;
+    }
+
+    /* Grid Layouts */
+    .grid-2 {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 20px;
+    }
+    .grid-3 {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 20px;
+    }
+
+    /* Cards */
+    .card, .value {
+      background: rgb(41, 1, 1);
+      padding: 20px;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(244, 233, 233, 0.1);
+      transition: transform 0.3s ease;
+    }
+    .card:hover, .value:hover {
+      transform: translateY(-5px);
+    }
+    .card h3, .value h3 {
+      margin-bottom: 12px;
+      font-size: 1.3rem;
+      color: #0077cc;
+    }
+
+    /* Features */
+    .features {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 15px;
+    }
+    .feature {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+    }
+    .feature .dot {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: #0077cc;
+      margin-top: 5px;
+    }
+
+    /* CTA */
+    .cta {
+      background: #200701;
+      padding: 30px;
+      border-radius: 12px;
+      text-align: center;
+      color: white;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+    }
+    .cta h3 {
+      font-size: 1.6rem;
+      margin-bottom: 20px;
+    }
+    .cta a {
+      display: inline-block;
+      margin: 5px 10px;
+      padding: 10px 20px;
+      border-radius: 8px;
+      background: white;
+      color: #0077cc;
+      font-weight: bold;
+      text-decoration: none;
+      transition: background 0.3s;
+    }
+    .cta a:hover {
+      background: #e0e0e0;
+    }
+    .cta a.primary {
+      background: #ffcc00;
+      color: black;
+    }
+
+    /* ====== FOOTER (from your second code) ====== */
+    footer {
+      background:#000;
+      padding:60px 20px;
+      margin-top:50px;
+      height: 500px;
+      display:grid;
+      justify-content: space-evenly;
+      grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+      gap:20px;
+    }
+
+    footer h3 {
+      margin-bottom:15px;
+      font-weight:900;
+      font-size:x-large;
+    }
+
+    footer p, footer a {
+      color:#aaa;
+      font-size:14px;
+    }
+
+    .socials { display:flex; gap:15px; margin-top:10px; }
+    .socials a { font-size:20px; transition: transform .3s, color .3s; }
+    .socials a:hover { transform: scale(1.2); color:#f39c12; }
+
+    @media (max-width: 1024px){
+      .hero .container { grid-template-columns:1fr }
+      .hero-visual { order:-1; height: 46vh }
     }
   </style>
 </head>
 <body>
 
-  <!-- Navbar -->
+  <!-- NAVBAR -->
   <nav>
-    <div class="navbar-container">
-      <!-- Logo -->
-      <div class="logo">
-        <img src="logo.png" alt="Logo">
-        <span>MyAssociation</span>
-      </div>
-
-      <!-- Menu -->
-      <ul class="menu" id="menu">
-        <li><a href="index.html">Home</a></li>
-
-        <li class="dropdown">
-          <a href="#">About ▼</a>
-          <div class="dropdown-content">
-            <a href="about-alumni.html">About Alumni</a>
-            <a href="about-us.html">Our Team</a>
-          </div>
-        </li>
-
-        <li><a href="events.html">Events</a></li>
-        <li><a href="schedule.html">Schedule</a></li>
-        <li><a href="sponsors.html">Sponsors</a></li>
-        <li><a href="gallery.html">Gallery</a></li>
-        <li><a href="contact.html">Contact</a></li>
-
-        <li>
-          <button class="register-btn">Register</button>
-        </li>
-      </ul>
-
-      <!-- Hamburger -->
-      <div class="hamburger" id="hamburger">
-        <div></div>
-        <div></div>
-        <div></div>
+    <div class="logo">
+      <img src="logo.png" alt="Logo">
+      <div style="display:flex; flex-direction:column;">
+        <span>Alumni</span>
+        <span style="font-size:small; color:yellow;">Golden Valley</span>
       </div>
     </div>
+    <div class="hamburger" onclick="toggleMenu()">
+      <span></span><span></span><span></span>
+    </div>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="#">About</a>
+        <div class="dropdown-content">
+          <a href="about-alumni.html">About Alumni</a>
+          <a href="about-us.html">About Team</a>
+        </div>
+      </li>
+      <li><a href="events.html">Events</a></li>
+      <li><a href="schedule.html">Schedule</a></li>
+      <li><a href="sponsors.html">Sponsors</a></li>
+      <li><a href="#">Gallery</a>
+        <div class="dropdown-content">
+          <a href="past-gallery.html">Past Events</a>
+          <a href="ongoing-gallery.html">Current Event</a>
+        </div>
+      </li>
+      <li><a href="contact.html">Contact</a></li>
+      <li><button class="login-btn">Login</button></li>
+    </ul>
   </nav>
 
-  <!-- JS for toggle -->
+  <!-- HERO -->
+  <header class="hero">
+    <div class="container">
+      <div>
+        <span class="tag parallax" data-parallax="8">Independent • Community • Ideas</span>
+        <h1 class="headline parallax" data-parallax="14" style="color: yellow;">Who we are</h1>
+        <p class="sub parallax" data-parallax="20">
+          We are the Golden Valley HS School Alumni Association, a network of thoughts united by a shared history and a common purpose.
+        </p>
+      </div>
+      <div class="hero-visual reveal">
+        <img src="logo.png" alt="Hero" style="width:100%; height:100%; object-fit:cover; border-radius:24px;"/>
+        <div class="orb"></div>
+      </div>
+    </div>
+  </header>
+
+  <!-- WHO WE ARE -->
+  <section>
+    <div class="container">
+      <h2 class="section-title reveal" style="color: yellow;">GOLDEN VALLEY HS SCHOOL</h2>
+      <p class="section-sub reveal">Golden Valley HS School (GVHS) is an outstanding educational institution located in Dharmanagar, Tripura. Founded on June 30, 1989, it became Govt. Aided in 2002 and CBSE affiliated in 2020. Today it serves over 1500 students.</p>
+    </div>
+  </section>
+    <!-- MISSION & VISION -->
+  <section id="mission">
+    <div class="container">
+      <h2 class="section-title reveal" style="color: yellow;">Mission & Vision</h2>
+      <div class="grid-2 reveal-stagger">
+        <article class="card" style="background-color: rgb(35, 2, 2); text-shadow: 12px white;">
+          <h3>Our Mission</h3>
+          <p>to foster lifelong relationships between the institution and its graduates, creating a vibrant community that benefits both current students and the school itself.</p>
+        </article>
+        <article class="card"style="background-color: rgb(35, 2, 2); text-shadow: 12px white;">
+          <h3>Our Vision</h3>
+          <p>becoming a global, interconnected community that fosters lifelong connections between the institution and its graduates, creating a network of loyalty, mentorship, and mutual support to enhance academic excellence, promote professional growth, and give back to current students, the school, and society at large.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- VALUES -->
+  <section id="values">
+    <div class="container">
+      <h2 class="section-title reveal" style="color: yellow;">Our Values</h2>
+      <div class="grid-3 reveal-stagger">
+        <div class="value">
+          <h3>Community and Belonging</h3>
+          <p>Alumni groups create a sense of shared experience and instant connection, offering a strong support system and a place to maintain friendships. </p>
+        </div>
+        <div class="value">
+          <h3>Mentorship and Guidance</h3>
+          <p>Experienced alumni can provide valuable insights, advice, and guidance for navigating career challenges and achieving personal growth. </p>
+        </div>
+        <div class="value">
+          <h3>Professional Networking</h3>
+          <p>Groups organize events and platforms that connect graduates with experienced professionals, industry leaders, and other alumni for career growth and collaboration. </p>
+        </div>
+        <div class="value">
+          <h3>Lifelong Learning</h3>
+          <p>Alumni can access tailored learning programs, academic networks, and the prestige of their alma mater's reputation, which enhances career success. </p>
+        </div>
+        <div class="value">
+          <h3>Community & Social Responsibility</h3>
+          <p>By mentoring younger people, alumni demonstrate a positive influence on their communities and contribute to the enhancement of their alma mater's social unity</p>
+        </div>
+        <div class="value">
+          <h3>Integrity</h3>
+          <p>Alumni groups act as a bridge, connecting the past, present, and future, ensuring a lasting relationship between graduates and their educational institution. </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- HIGHLIGHTS -->
+  <section id="highlights">
+    <div class="container">
+      <h2 class="section-title reveal" style="color: yellow;">What to Expect</h2>
+      <p class="section-sub reveal">Networking and Professional Connections.</p>
+      <div class="features reveal-stagger" style="margin-top:18px">
+        <div class="feature"><span class="dot"></span><div><strong>Engaging speakers</strong><br/>From diverse backgrounds and disciplines.</div></div>
+        <div class="feature"><span class="dot"></span><div><strong>Community and</strong><br/>Social Events</div></div>
+        <div class="feature"><span class="dot"></span><div><strong>Meaningful connections</strong><br/>Personal Growth</div></div>
+        <div class="feature"><span class="dot"></span><div><strong>Local culture</strong><br/>A celebration of creativity and innovation.</div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section id="join">
+    <div class="container">
+      <div class="cta reveal">
+        <h3>Be the part of Alumni</h3>
+        <div>
+          <a class="primary" href="tel:+918732016798">Contact US</a>
+          
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER (new one) -->
+  <footer>
+    <div>
+      <h3 style="color:yellow;">Alumni Association</h3>
+      <p>Building connections through events & community.</p>
+    </div>
+    <div>
+      <h3 style="color:yellow;">Contact</h3>
+      <p>Email: contact@association.com</p>
+      <p>Phone: +91 9999999999</p>
+    </div>
+    <div>
+      <a href="https://www.google.com/maps/place/Golden+Valley+HS+School/">
+        <h3 style="color:yellow;"><i class="fa-solid fa-location-dot"></i> Location</h3>
+      </a>
+      <p>Padmapur | Dharmanagar | Tripura</p>
+    </div>
+    <div>
+      <h3 style="color:yellow;">Follow Us</h3>
+      <div class="socials">
+        <a href="https://www.facebook.com/gvhs.alumni/"><i class="fab fa-facebook"></i></a>
+        <a href="#"><i class="fab fa-instagram"></i></a>
+        <a href="#"><i class="fab fa-twitter"></i></a>
+        <a href="#"><i class="fab fa-linkedin"></i></a>
+      </div>
+    </div>
+  </footer>
+
   <script>
-    const hamburger = document.getElementById('hamburger');
-    const menu = document.getElementById('menu');
+    // Hamburger menu
+    function toggleMenu(){ document.getElementById('navLinks').classList.toggle('active'); }
 
-    hamburger.addEventListener('click', () => {
-      menu.classList.toggle('active');
-    });
+    // Reveal on scroll
+    const revealEls = document.querySelectorAll('.reveal, .reveal-stagger');
+    const io = new IntersectionObserver((entries)=>{
+      entries.forEach(entry=>{
+        if(entry.isIntersecting){
+          entry.target.classList.add('in-view');
+          io.unobserve(entry.target);
+        }
+      });
+    }, {threshold:.15});
+    revealEls.forEach(el=> io.observe(el));
   </script>
-
 </body>
 </html>
+

@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Contact Us</title>
+  <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(135deg, #667eea, #764ba2);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      flex-direction: column;
+      gap: 80px;
+    }
+
+    /* nav bar style */
+
+       nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: #1a1a1a;
+      padding: 12px 10px;
+      width: 100%;
+    }
+
+    /* Left side */
+    .logo {
+      display: flex;
+      align-items: center;
+      color: white;
+      font-size: 1.2rem;
+      font-weight: bold;
+    }
+
+    .logo img {
+      height: 40px;
+      margin-right: 10px;
+      filter: brightness(25) saturate(20);
+    }
+
+    /* Right side menu */
+    .nav-links {
+      display: flex;
+      align-items: center;
+      list-style: none;
+    }
+
+    .nav-links li {
+      position: relative;
+    }
+
+    .nav-links a {
+      color: white;
+      text-decoration: none;
+      padding: 10px 15px;
+      display: block;
+      font-weight: 700;
+      transition: background 0.3s;
+    }
+
+    .nav-links a:hover {
+      background: #333;
+      border-radius: 5px;
+    }
+
+    /* Dropdown */
+    .dropdown-content {
+      display: none;
+      position: absolute;
+      top: 100%;
+      left: 0;
+      background: #222;
+      min-width: 160px;
+      border-radius: 5px;
+      z-index: 10;
+    }
+
+    .dropdown-content a {
+      padding: 10px 15px;
+      white-space: nowrap;
+    }
+
+    .nav-links li:hover .dropdown-content {
+      display: block;
+    }
+
+    /* Login button */
+    .login-btn {
+      background: #ff6600;
+      color: white;
+      padding: 8px 18px 8px 18px;
+      border: none;
+      font-size:medium;
+      font-weight: 900;
+      width: 80px;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background 0.3s;
+      margin-left: 50px; /* <-- extra spacing before login button */
+    }
+
+    .login-btn:hover {
+      background: #e55b00;
+    }
+
+    /* Hamburger */
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      cursor: pointer;
+    }
+
+    .hamburger span {
+      height: 3px;
+      width: 25px;
+      background: white;
+      margin: 4px 0;
+      border-radius: 3px;
+    }
+
+    @media (max-width: 768px) {
+      .nav-links {
+        position: absolute;
+        top: 60px;
+        right: 0;
+        background: #1a1a1a;
+        flex-direction: column;
+        width: 200px;
+        display: none;
+      }
+
+      .nav-links.active {
+        display: flex;
+      }
+
+      .nav-links li {
+        width: 100%;
+      }
+
+      .login-btn {
+        margin-left: 0; /* remove extra gap in mobile */
+        margin-top: 10px;
+      }
+
+      .hamburger {
+        display: flex;
+      }
+    }
+
+    .contact-container {
+      background: white;
+      padding: 30px;
+      border-radius: 15px;
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+      width: 400px;
+      animation: fadeIn 0.8s ease-in-out;
+    }
+
+    .contact-container h2 {
+      text-align: center;
+      margin-bottom: 20px;
+      color: #333;
+    }
+
+    .form-group {
+      margin-bottom: 15px;
+    }
+
+    .form-group label {
+      display: block;
+      font-weight: 600;
+      margin-bottom: 6px;
+      color: #555;
+    }
+
+    .form-group input,
+    .form-group textarea {
+      width: 100%;
+      padding: 12px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      font-size: 14px;
+      transition: border 0.3s ease;
+    }
+
+    .form-group input:focus,
+    .form-group textarea:focus {
+      border-color: #667eea;
+      outline: none;
+    }
+
+    .form-group textarea {
+      resize: none;
+      height: 100px;
+    }
+
+    button {
+      width: 100%;
+      padding: 12px;
+      background: #667eea;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+
+    button:hover {
+      background: #5a67d8;
+    }
+
+    .success,
+    .error {
+      margin-top: 15px;
+      padding: 10px;
+      border-radius: 8px;
+      font-size: 14px;
+      text-align: center;
+      display: none;
+    }
+
+    .success {
+      background: #d4edda;
+      color: #155724;
+    }
+
+    .error {
+      background: #f8d7da;
+      color: #721c24;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(-20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+  </style>
+</head>
+<body>
+  <nav>
+    <!-- Left side -->
+    <div class="logo">
+      <img src="logo.png" alt="Logo">
+      <div class="alumni" style="display: flex; flex-direction: column;">
+        <span>Alumni</span>
+        <span style="font-size: small;color: yellow">Golden Valley</span>
+      </div>
+    </div>
+
+    <!-- Hamburger for small screens -->
+    <div class="hamburger" onclick="toggleMenu()">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+
+    <!-- Right side -->
+    <ul class="nav-links" id="navLinks">
+      <li><a href="#">Home</a></li>
+      <li>
+        <a href="#">About</a>
+        <div class="dropdown-content">
+          <a href="about-alumni.html">About Alumni</a>
+          <a href="about-us.html">About Team</a>
+        </div>
+      </li>
+      <li><a href="events.html">Events</a></li>
+      <li><a href="schedule.html">Schedule</a></li>
+      <li><a href="sponsors.html">Sponsors</a></li>
+      <li>
+        <a href="#">Gallery</a>
+        <div class="dropdown-content">
+          <a href="past-gallery.html">Past Events</a>
+          <a href="ongoing-gallery.html">Current Event</a>
+        </div>
+      </li>
+      <li><a href=".html">Contact</a></li>
+      <li><button class="login-btn">Login</button></li>
+    </ul>
+  </nav>
+  <div class="contact-container">
+    <h2>Contact Us</h2>
+    <form id="contact-form">
+      <div class="form-group">
+        <label for="title">Subject</label>
+        <input type="text" id="title" name="title" placeholder="Enter subject" required>
+      </div>
+      <div class="form-group">
+        <label for="name">Full Name</label>
+        <input type="text" id="name" name="name" placeholder="Enter your name" required>
+      </div>
+      <div class="form-group">
+        <label for="email">Email Address</label>
+        <input type="email" id="email" name="email" placeholder="Enter your email" required>
+      </div>
+      <div class="form-group">
+        <label for="phone">Phone Number</label>
+        <input type="text" id="phone" name="phone" placeholder="Enter your phone number">
+      </div>
+      <div class="form-group">
+        <label for="message">Message</label>
+        <textarea id="message" name="message" placeholder="Write your message" required></textarea>
+      </div>
+      <button type="submit">Send Message</button>
+      <div class="success" id="success-msg">✅ Your message has been sent!</div>
+      <div class="error" id="error-msg">❌ Failed to send. Try again.</div>
+    </form>
+  </div>
+
+  <script>
+    (function() {
+      emailjs.init("aqQVoFqiydJ8MPDVq"); // Your Public Key
+    })();
+
+    document.getElementById("contact-form").addEventListener("submit", function(event) {
+      event.preventDefault();
+
+      const params = {
+        title: document.getElementById("title").value,
+        name: document.getElementById("name").value,
+        email: document.getElementById("email").value,
+        phone: document.getElementById("phone").value,
+        message: document.getElementById("message").value,
+      };
+
+      emailjs.send("service_v6qityp", "template_r35ijga", params)
+        .then(function(response) {
+          document.getElementById("success-msg").style.display = "block";
+          document.getElementById("error-msg").style.display = "none";
+          document.getElementById("contact-form").reset();
+        }, function(error) {
+          document.getElementById("error-msg").style.display = "block";
+          document.getElementById("success-msg").style.display = "none";
+          console.error("EmailJS Error:", error);
+        });
+    });
+  </script>
+  </script>
+  <script>
+    function toggleMenu() {
+      document.getElementById('navLinks').classList.toggle('active');
+    }
+  </script>
+</body>
+</html>

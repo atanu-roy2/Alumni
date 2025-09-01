@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+           * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #111;
+    }
+
+    nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: #1a1a1a;
+      padding: 12px 10px;
+    }
+
+    /* Left side */
+    .logo {
+      display: flex;
+      align-items: center;
+      color: white;
+      font-size: 1.2rem;
+      font-weight: bold;
+    }
+
+    .logo img {
+      height: 40px;
+      margin-right: 10px;
+      filter: brightness(25) saturate(20);
+    }
+
+    /* Right side menu */
+    .nav-links {
+      display: flex;
+      align-items: center;
+      list-style: none;
+    }
+
+    .nav-links li {
+      position: relative;
+    }
+
+    .nav-links a {
+      color: white;
+      text-decoration: none;
+      padding: 10px 15px;
+      display: block;
+      font-weight: 700;
+      transition: background 0.3s;
+    }
+
+    .nav-links a:hover {
+      background: #333;
+      border-radius: 5px;
+    }
+
+    /* Dropdown */
+    .dropdown-content {
+      display: none;
+      position: absolute;
+      top: 100%;
+      left: 0;
+      background: #222;
+      min-width: 160px;
+      border-radius: 5px;
+      z-index: 10;
+    }
+
+    .dropdown-content a {
+      padding: 10px 15px;
+      white-space: nowrap;
+    }
+
+    .nav-links li:hover .dropdown-content {
+      display: block;
+    }
+
+    /* Login button */
+    .login-btn {
+      background: #ff6600;
+      color: white;
+      padding: 8px 18px 8px 18px;
+      border: none;
+      font-size:medium;
+      font-weight: 900;
+      width: 80px;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background 0.3s;
+      margin-left: 50px; /* <-- extra spacing before login button */
+    }
+
+    .login-btn:hover {
+      background: #e55b00;
+    }
+
+    /* Hamburger */
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      cursor: pointer;
+    }
+
+    .hamburger span {
+      height: 3px;
+      width: 25px;
+      background: white;
+      margin: 4px 0;
+      border-radius: 3px;
+    }
+
+    @media (max-width: 768px) {
+      .nav-links {
+        position: absolute;
+        top: 60px;
+        right: 0;
+        background: #1a1a1a;
+        flex-direction: column;
+        width: 200px;
+        display: none;
+      }
+
+      .nav-links.active {
+        display: flex;
+      }
+
+      .nav-links li {
+        width: 100%;
+      }
+
+      .login-btn {
+        margin-left: 0; /* remove extra gap in mobile */
+        margin-top: 10px;
+      }
+
+      .hamburger {
+        display: flex;
+      }
+    }
+
+    </style>
+</head>
+<body>
+    
+    <nav>
+        <!-- Left side -->
+        <div class="logo">
+          <img src="logo.png" alt="Logo">
+          <div class="alumni" style="display: flex; flex-direction: column;">
+            <span>Alumni</span>
+            <span style="font-size: small;color: yellow">Golden Valley</span>
+          </div>
+        </div>
+    
+        <!-- Hamburger for small screens -->
+        <div class="hamburger" onclick="toggleMenu()">
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+    
+        <!-- Right side -->
+        <ul class="nav-links" id="navLinks">
+          <li><a href="#">Home</a></li>
+          <li>
+            <a href="#">About</a>
+            <div class="dropdown-content">
+              <a href="about-alumni.html">About Alumni</a>
+              <a href="about-us.html">About Team</a>
+            </div>
+          </li>
+          <li><a href="events.html">Events</a></li>
+          <li><a href="schedule.html">Schedule</a></li>
+          <li><a href="sponsors.html">Sponsors</a></li>
+          <li>
+            <a href="#">Gallery</a>
+            <div class="dropdown-content">
+              <a href="past-gallery.html">Past Events</a>
+              <a href="ongoing-gallery.html">Current Event</a>
+            </div>
+          </li>
+          <li><a href=".html">Contact</a></li>
+          <li><button class="login-btn">Login</button></li>
+        </ul>
+      </nav>
+</body>
+</html>
+

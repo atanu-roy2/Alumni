@@ -1,0 +1,122 @@
+/* Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Segoe UI', sans-serif;
+  background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+  color: white;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Navbar */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #111;
+  padding: 10px 40px;
+}
+
+.navbar .logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 20px;
+  font-weight: bold;
+  color: white;
+}
+
+.navbar img {
+  height: 40px;
+  border-radius: 50%;
+}
+
+.nav-links {
+  list-style: none;
+  display: flex;
+  gap: 20px;
+}
+
+.nav-links a {
+  text-decoration: none;
+  color: white;
+  font-size: 15px;
+  transition: 0.3s;
+}
+
+.nav-links a:hover {
+  color: #ff6600;
+}
+
+.login-btn {
+  background: #ff6600;
+  padding: 8px 16px;
+  border-radius: 6px;
+  color: white;
+  text-decoration: none;
+  font-weight: bold;
+  transition: 0.3s;
+}
+
+.login-btn:hover {
+  background: #ff8533;
+}
+
+/* Coming Soon Section */
+.coming-soon {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 50px 20px;
+}
+
+.coming-soon h1 {
+  font-size: 60px;
+  margin-bottom: 20px;
+  animation: fadeIn 2s ease-in-out;
+}
+
+.coming-soon p {
+  font-size: 20px;
+  margin-bottom: 40px;
+  color: #ddd;
+}
+
+.countdown {
+  display: flex;
+  gap: 30px;
+}
+
+.countdown div {
+  background: rgba(255, 255, 255, 0.1);
+  padding: 20px;
+  border-radius: 10px;
+  min-width: 80px;
+  text-align: center;
+}
+
+.countdown span {
+  display: block;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.countdown small {
+  font-size: 14px;
+  color: #bbb;
+}
+
+/* Animation */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
