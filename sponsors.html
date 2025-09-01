@@ -19,109 +19,91 @@
     }
 
     nav {
-      width: 100%;
-      background: #fff;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
-      position: fixed;
-      top: 0;
-      left: 0;
-      z-index: 1000;
-    }
-
-    .navbar-container {
-      max-width: 1200px;
-      margin: auto;
       display: flex;
-      align-items: center;
       justify-content: space-between;
-      padding: 12px 20px;
+      align-items: center;
+      background: #1a1a1a;
+      padding: 12px 10px;
     }
 
-    /* Logo */
+    /* Left side */
     .logo {
       display: flex;
       align-items: center;
-    }
-    .logo img {
-      height: 40px;
-      width: 40px;
-      border-radius: 50%;
-      margin-right: 8px;
-    }
-    .logo span {
+      color: white;
       font-size: 1.2rem;
       font-weight: bold;
-      color: #333;
     }
 
-    /* Menu */
-    .menu {
+    .logo img {
+      height: 40px;
+      margin-right: 10px;
+      filter: brightness(25) saturate(20);
+    }
+
+    /* Right side menu */
+    .nav-links {
       display: flex;
       align-items: center;
       list-style: none;
-      gap: 20px;
     }
 
-    .menu li {
+    .nav-links li {
       position: relative;
     }
 
-    .menu a {
+    .nav-links a {
+      color: white;
       text-decoration: none;
-      color: #333;
-      font-size: 1rem;
-      transition: 0.3s;
+      padding: 10px 15px;
+      display: block;
+      font-weight: 700;
+      transition: background 0.3s;
     }
 
-    .menu a:hover {
-      color: #007bff;
+    .nav-links a:hover {
+      background: #333;
+      border-radius: 5px;
     }
 
     /* Dropdown */
-    .dropdown {
-      position: relative;
-    }
-
     .dropdown-content {
       display: none;
       position: absolute;
       top: 100%;
       left: 0;
-      background: #fff;
-      min-width: 150px;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.15);
-      border-radius: 4px;
+      background: #222;
+      min-width: 160px;
+      border-radius: 5px;
+      z-index: 10;
     }
 
     .dropdown-content a {
-      display: block;
-      padding: 10px;
-      font-size: 0.95rem;
-      color: #333;
+      padding: 10px 15px;
+      white-space: nowrap;
     }
 
-    .dropdown-content a:hover {
-      background: #f0f0f0;
-    }
-
-    .dropdown:hover .dropdown-content {
+    .nav-links li:hover .dropdown-content {
       display: block;
     }
 
-    /* Register Button */
-    .register-btn {
-      margin-left: 20px;
-      padding: 8px 16px;
-      background: #007bff;
-      color: #fff;
+    /* Login button */
+    .login-btn {
+      background: #ff6600;
+      color: white;
+      padding: 8px 18px 8px 18px;
       border: none;
-      border-radius: 20px;
+      font-size:medium;
+      font-weight: 900;
+      width: 80px;
+      border-radius: 5px;
       cursor: pointer;
-      font-size: 0.95rem;
-      transition: 0.3s;
+      transition: background 0.3s;
+      margin-left: 50px; /* <-- extra spacing before login button */
     }
-    .register-btn:hover {
-      background: #0056b3;
+
+    .login-btn:hover {
+      background: #e55b00;
     }
 
     /* Hamburger */
@@ -129,15 +111,44 @@
       display: none;
       flex-direction: column;
       cursor: pointer;
-      gap: 5px;
     }
 
-    .hamburger div {
-      width: 25px;
+    .hamburger span {
       height: 3px;
-      background: #333;
+      width: 25px;
+      background: white;
+      margin: 4px 0;
+      border-radius: 3px;
     }
 
+    @media (max-width: 768px) {
+      .nav-links {
+        position: absolute;
+        top: 60px;
+        right: 0;
+        background: #1a1a1a;
+        flex-direction: column;
+        width: 200px;
+        display: none;
+      }
+
+      .nav-links.active {
+        display: flex;
+      }
+
+      .nav-links li {
+        width: 100%;
+      }
+
+      .login-btn {
+        margin-left: 0; /* remove extra gap in mobile */
+        margin-top: 10px;
+      }
+
+      .hamburger {
+        display: flex;
+      }
+    }
     /* Mobile Menu */
     @media (max-width: 768px) {
       .menu {
@@ -157,6 +168,7 @@
       }
       .hamburger {
         display: flex;
+        z-index: 10000;
       }
       .menu.active {
         display: flex;
@@ -165,6 +177,7 @@
         position: static;
         box-shadow: none;
         border-radius: 0;
+        z-index: 1000;
       }
     }
 /* Space for navbar */

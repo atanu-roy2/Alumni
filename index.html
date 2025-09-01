@@ -123,33 +123,22 @@
       border-radius: 3px;
     }
 
-    @media (max-width: 768px) {
+  @media (max-width:768px) {
       .nav-links {
-        position: absolute;
-        top: 60px;
-        right: 0;
-        background: #1a1a1a;
-        flex-direction: column;
-        width: 200px;
-        display: none;
+        position:absolute; top:60px; right:0; background:#1a1a1a;
+        flex-direction:column; width:220px; display:none;
+        border-left:2px solid #333; border-bottom:2px solid #333;
       }
-
-      .nav-links.active {
-        display: flex;
+      .nav-links.active {display:flex;}
+      .nav-links li {width:100%;}
+      .nav-links a {padding:12px;}
+      .login-btn {margin:10px;}
+      .dropdown-content {
+        position:static; background:#222; border-radius:0; min-width:100%;
       }
-
-      .nav-links li {
-        width: 100%;
-      }
-
-      .login-btn {
-        margin-left: 0; /* remove extra gap in mobile */
-        margin-top: 10px;
-      }
-
-      .hamburger {
-        display: flex;
-      }
+      .nav-links li:hover .dropdown-content {display:none;} /* disable hover */
+      .nav-links li.open .dropdown-content {display:block;} /* enable click */
+      .hamburger {display:flex;}
     }
 
   html {
@@ -441,7 +430,7 @@
           <a href="ongoing-gallery.html">Current Event</a>
         </div>
       </li>
-      <li><a href=".html">Contact</a></li>
+      <li><a href="contact1.0.html">Contact</a></li>
       <li><button class="login-btn">Login</button></li>
     </ul>
   </nav>
@@ -450,7 +439,7 @@
     
     <h1>Welcome to Alumni Association</h1>
     <p>Connecting the past, building the future</p>
-    <button class="btn">Join Us</button>
+    <button class="btn" onclick="location.href='tel:+918732016798'">Join Us</button>
   </div>
 </section>
 
@@ -465,14 +454,14 @@
 </section>
 
 <!-- Events Preview -->
-<section>
+<!-- <section>
   <h2 style="color: yellow;">Upcoming Events</h2>
   <div class="events">
     <div class="card"><img src="COMING SOON.png" alt="Event 1"><h3>MILAAP 3.O</h3><p>Reconnect with old friends and network with professionals.</p></div>
-    <!-- <div class="card"><img src="https://via.placeholder.com/400x250" alt="Event 2"><h3>Webinar: Career Growth</h3><p>Expert talks and guidance for alumni and students.</p></div>
-    <div class="card"><img src="https://via.placeholder.com/400x250" alt="Event 3"><h3>Charity Run</h3><p>Join us for a cause and contribute to the community.</p></div> -->
+     <div class="card"><img src="https://via.placeholder.com/400x250" alt="Event 2"><h3>Webinar: Career Growth</h3><p>Expert talks and guidance for alumni and students.</p></div>
+    <div class="card"><img src="https://via.placeholder.com/400x250" alt="Event 3"><h3>Charity Run</h3><p>Join us for a cause and contribute to the community.</p></div> 
   </div>
-</section>
+</section> -->
 
 <!-- Gallery Preview -->
   <section>
@@ -530,9 +519,9 @@
         <a href="#"><i class="fab fa-linkedin"></i></a>
       </div>
     </div>
-  </footer>
-  <script src="https://cdn.botpress.cloud/webchat/v3.2/inject.js"></script>
+  </footer>  <script src="https://cdn.botpress.cloud/webchat/v3.2/inject.js"></script>
   <script src="https://files.bpcontent.cloud/2025/08/30/19/20250830190753-XP3BMBNB.js"></script>
+
 <script>
   // Scroll animation: show cards when in viewport
   const cards = document.querySelectorAll('.card, .contact-cta');
