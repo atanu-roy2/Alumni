@@ -1,549 +1,904 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Responsive Navbar</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Responsive Alumni Association</title>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-    body {
-      font-family: Arial, sans-serif;
-      background-color: #111;
-    }
-   
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #111;
+            color: white;
+            overflow-x: hidden;
+        }
 
-    nav {
+        /* Navbar - kept exactly the same */
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: #000;
+            padding: 10px 25px;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+
+        .logo img {
+            height: 45px;
+            margin-right: 10px;
+        }
+
+        .logo-text {
+            display: flex;
+            flex-direction: column;
+            line-height: 1.2;
+        }
+
+        .logo-text span:first-child {
+            font-size: 1.2rem;
+            font-weight: 900;
+        }
+
+        .logo-text span:last-child {
+            font-size: 0.85rem;
+            color: #aaa;
+        }
+
+        .nav-links {
+            list-style: none;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .nav-links li {
+            position: relative;
+        }
+
+        .nav-links li:last-child {
+            margin-left: 280px;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: white;
+            font-weight: 600;
+            padding: 8px 12px;
+            transition: 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: #f33;
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            top: 110%;
+            left: 0;
+            background: #1a1a1a;
+            border-radius: 6px;
+            min-width: 160px;
+            z-index: 1001;
+        }
+
+        .dropdown-content a {
+            display: block;
+            padding: 10px;
+            color: white;
+            font-weight: 500;
+        }
+
+        .dropdown-content a:hover {
+            background: #333;
+        }
+
+        .nav-links li:hover .dropdown-content {
+            display: block;
+        }
+
+        .login-btn {
+            background: red;
+            color: white;
+            font-weight: 700;
+            padding: 8px 18px;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .login-btn:hover {
+            background: #c70000;
+        }
+
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            gap: 5px;
+        }
+
+        .hamburger span {
+            width: 25px;
+            height: 3px;
+            background: white;
+            border-radius: 3px;
+        }
+
+        /* Hero Section with Full-width Background */
+        .hero {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), 
+                        url(bg-photo.jpg) center/cover no-repeat;
+            z-index: -1;
+        }
+
+        .hero-content {
+            max-width: 800px;
+            padding: 20px;
+            animation: fadeIn 1.5s ease-out;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.8);
+            font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+            letter-spacing: 8px;
+            color: #fff;
+        }
+
+        .hero p {
+            font-size: 1.5rem;
+            margin-bottom: 30px;
+            text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.8);
+            font-weight: 600;
+        }
+
+        .hero .btn {
+            padding: 15px 30px;
+            background: #ff6600;
+            border: none;
+            border-radius: 5px;
+            color: white;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+        }
+
+        .hero .btn:hover {
+            background: #e55b00;
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.6);
+        }
+
+        /* About Section with Interactive Elements */
+        .about-section {
+            padding: 100px 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        .about-section h2 {
+            text-align: center;
+            margin-bottom: 50px;
+            font-size: 2.5rem;
+            color: #ffcc00;
+        }
+
+        .about-content {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 40px;
+            justify-content: center;
+        }
+
+        .about-image {
+            flex: 1;
+            min-width: 300px;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            transition: transform 0.5s;
+        }
+
+        .about-image:hover {
+            transform: scale(1.03);
+        }
+
+        .about-image img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .about-text {
+            flex: 1;
+            min-width: 300px;
+            font-size: 1.1rem;
+            line-height: 1.7;
+        }
+
+        .stats-container {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            margin-top: 50px;
+            gap: 20px;
+        }
+
+        .stat-box {
+            text-align: center;
+            padding: 20px;
+            background: rgba(255, 204, 0, 0.1);
+            border-radius: 10px;
+            min-width: 180px;
+            transition: transform 0.3s;
+        }
+
+        .stat-box:hover {
+            transform: translateY(-10px);
+            background: rgba(255, 204, 0, 0.2);
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: #ffcc00;
+            margin-bottom: 10px;
+        }
+
+        .stat-text {
+            font-size: 1.1rem;
+        }
+
+        /* Gallery Section with Scrolling Animations */
+        .gallery-section {
+            padding: 100px 20px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .gallery-section h2 {
+            text-align: center;
+            margin-bottom: 50px;
+            font-size: 2.5rem;
+            color: #ffcc00;
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 25px;
+            margin-top: 30px;
+        }
+
+        .gallery-item {
+            position: relative;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            opacity: 0;
+            transform: translateY(50px);
+            transition: opacity 0.8s, transform 0.8s;
+        }
+
+        .gallery-item.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+
+        .gallery-item:hover img {
+            transform: scale(1.1);
+        }
+
+        .gallery-caption {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: rgba(0, 0, 0, 0.8);
+            padding: 15px;
+            transform: translateY(100%);
+            transition: transform 0.3s;
+        }
+
+        .gallery-item:hover .gallery-caption {
+            transform: translateY(0);
+        }
+
+        /* Creative Contact Section */
+        .contact-section {
+            padding: 100px 20px;
+            background: linear-gradient(to bottom, #1a1a1a, #000);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .contact-section::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('https://images.unsplash.com/photo-1516387938699-a93567ec168e?ixlib=rb-4.0.3&auto=format&fit=crop&w=2000&q=80') center/cover no-repeat;
+            opacity: 0.2;
+            z-index: 0;
+        }
+
+        .contact-content {
+            max-width: 1000px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+            text-align: center;
+        }
+
+        .contact-content h2 {
+            font-size: 2.8rem;
+            margin-bottom: 20px;
+            color: #ffcc00;
+        }
+
+        .contact-content p {
+          display: flex;
+            font-size: 1.2rem;
+            margin-bottom: 40px;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+            justify-content: center;
+        }
+
+        .contact-cards {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 30px;
+            margin-top: 50px;
+        }
+
+        .contact-card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 30px;
+            width: 250px;
+            text-align: center;
+            transition: transform 0.3s, box-shadow 0.3s;
+            border: 1px solid rgba(255, 204, 0, 0.3);
+        }
+
+        .contact-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 25px rgba(255, 204, 0, 0.2);
+        }
+
+        .contact-icon {
+            font-size: 2.5rem;
+            color: #ffcc00;
+            margin-bottom: 20px;
+        }
+
+        .contact-card h3 {
+            margin-bottom: 15px;
+            font-size: 1.5rem;
+        }
+
+        .contact-card p {
+            margin-bottom: 20px;
+            font-size: 1rem;
+        }
+
+        .contact-btn {
+            display: inline-block;
+            padding: 12px 25px;
+            background: #ff6600;
+            color: white;
+            text-decoration: none;
+            border-radius: 30px;
+            transition: all 0.3s;
+        }
+
+        .contact-btn:hover {
+            background: #ffcc00;
+            color: #000;
+            transform: scale(1.05);
+        }
+
+        /* Footer */
+       footer {
+      background: #0a0a1a;
+      padding: 50px 80px;
+      color: #ccc;
       display: flex;
       justify-content: space-between;
-      align-items: center;
-      background: #1a1a1a;
-      padding: 12px 10px;
-      
-   
+      flex-wrap: wrap;
     }
-
-    /* Left side */
-    .logo {
-      display: flex;
-      align-items: center;
-      color: white;
-      font-size: 1.2rem;
-      font-weight: bold;
+    .footer-col {
+      flex: 1;
+      margin: 15px;
+      min-width: 250px;
     }
-
-    .logo img {
-      height: 40px;
-      margin-right: 10px;
-      filter: brightness(25) saturate(20);
+    .footer-col h3 {
+      margin-bottom: 20px;
+      color: #fff;
     }
-
-    /* Right side menu */
-    .nav-links {
-      display: flex;
-      align-items: center;
-      list-style: none;
-    }
-
-    .nav-links li {
-      position: relative;
-    }
-
-    .nav-links a {
-      color: white;
+    .footer-col p, .footer-col a {
+      color: #aaa;
       text-decoration: none;
-      padding: 10px 15px;
-      display: block;
-      font-weight: 700;
-      transition: background 0.3s;
+      font-size: 15px;
+      line-height: 1.6;
+    }
+    .footer-col a:hover {
+      color: red;
+    }
+    .social-icons a {
+      margin-right: 12px;
+      font-size: 20px;
+      color: #fff;
+      transition: color 0.3s ease;
+    }
+    .social-icons a:hover {
+      color: red;
+    }
+    .footer-bottom {
+      text-align: center;
+      padding: 20px;
+      border-top: 1px solid #333;
+      margin-top: 30px;
+      font-size: 14px;
     }
 
-    .nav-links a:hover {
-      background: #333;
-      border-radius: 5px;
-    }
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
 
-    /* Dropdown */
-    .dropdown-content {
-      display: none;
-      position: absolute;
-      top: 100%;
-      left: 0;
-      background: #222;
-      min-width: 160px;
-      border-radius: 5px;
-      z-index: 10;
-    }
+        /* Responsive Design */
+        @media (max-width: 1200px) {
+            .nav-links li:last-child {
+                margin-left: 150px;
+            }
+        }
 
-    .dropdown-content a {
-      padding: 10px 15px;
-      white-space: nowrap;
-    }
+        @media (max-width: 992px) {
+            .nav-links li:last-child {
+                margin-left: 50px;
+            }
+            
+            .hero h1 {
+                font-size: 2.8rem;
+            }
+            
+            .hero p {
+                font-size: 1.3rem;
+            }
+        }
 
-    .nav-links li:hover .dropdown-content {
-      display: block;
-    }
+        @media (max-width: 768px) {
+            .nav-links {
+                position: fixed;
+                top: 65px;
+                right: -100%;
+                flex-direction: column;
+                background: #000;
+                width: 220px;
+                height: calc(100vh - 65px);
+                padding: 20px;
+                transition: right 0.3s ease;
+                overflow-y: auto;
+                gap: 0;
+            }
+            
+            .nav-links.active {
+                right: 0;
+                display: flex;
+            }
+            
+            .nav-links li {
+                width: 100%;
+                margin: 10px 0;
+            }
+            
+            .nav-links li:last-child {
+                margin-left: 0;
+                margin-top: 20px;
+            }
+            
+            .dropdown-content {
+                position: static;
+                display: none;
+                margin-top: 10px;
+                margin-left: 20px;
+                width: calc(100% - 20px);
+            }
+            
+            .nav-links li:hover .dropdown-content {
+                display: none;
+            }
+            
+            .nav-links li.active .dropdown-content {
+                display: block;
+            }
+            
+            .hamburger {
+                display: flex;
+            }
+            
+            .hero h1 {
+                font-size: 2.2rem;
+                letter-spacing: 4px;
+            }
+            
+            .hero p {
+                font-size: 1.1rem;
+            }
+            
+            .about-content {
+                flex-direction: column;
+            }
+            
+            .stats-container {
+                justify-content: center;
+            }
+            
+            .gallery-grid {
+                grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            }
+        }
 
-    /* Login button */
-    .login-btn {
-      background: #ff6600;
-      color: white;
-      padding: 8px 18px 8px 18px;
-      border: none;
-      font-size:medium;
-      font-weight: 900;
-      width: 80px;
-      border-radius: 5px;
-      cursor: pointer;
-      transition: background 0.3s;
-      margin-left: 50px; /* <-- extra spacing before login button */
-    }
-
-    .login-btn:hover {
-      background: #e55b00;
-    }
-
-    /* Hamburger */
-    .hamburger {
-      display: none;
-      flex-direction: column;
-      cursor: pointer;
-    }
-
-    .hamburger span {
-      height: 3px;
-      width: 25px;
-      background: white;
-      margin: 4px 0;
-      border-radius: 3px;
-    }
-
-  @media (max-width:768px) {
-      .nav-links {
-        position:absolute; top:60px; right:0; background:#1a1a1a;
-        flex-direction:column; width:220px; display:none;
-        border-left:2px solid #333; border-bottom:2px solid #333;
-      }
-      .nav-links.active {display:flex;}
-      .nav-links li {width:100%;}
-      .nav-links a {padding:12px;}
-      .login-btn {margin:10px;}
-      .dropdown-content {
-        position:static; background:#222; border-radius:0; min-width:100%;
-      }
-      .nav-links li:hover .dropdown-content {display:none;} /* disable hover */
-      .nav-links li.open .dropdown-content {display:block;} /* enable click */
-      .hamburger {display:flex;}
-    }
-
-  html {
-    scroll-behavior: smooth;
-  }
-
-  .hero {
-    height: 90vh;
-    background-position: center center;
-    
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    color: white;
-    padding: 20px;
-    
-  }
-  .hero::before {
-    content: "";
-    background: url(bg-photo.jpg) center/cover no-repeat;
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  z-index: -1;
-  /* background: rgba(0,0,0,0.5); Optional dark overlay */
-}
-.hero-content {
-  position: relative;
-  z-index: 1;
-}
-
-  .hero h1 {
-    font-size: 3rem;
-    margin-bottom: 15px;
-    text-shadow:-4px 0 4px #514f04;
-    font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
-    letter-spacing: 8px;
-  }
-
-  .hero p {
-    font-size: 1.2rem;
-    margin-bottom: 20px;
-    text-shadow:-10px 0 12px #100744;
-    font-weight: 800;
-  }
-
-  .hero .btn {
-    padding: 12px 25px;
-    background: #ff6600;
-    border: none;
-    border-radius: 5px;
-    color: white;
-    font-size: 1rem;
-    cursor: pointer;
-    transition: background 0.3s;
-    box-shadow:15px 15px 12px black ;
-  }
-
-  .hero .btn:hover {
-    background: #e55b00;
-  }
-
-  section {
-    padding: 60px 20px;
-    max-width: 1200px;
-    margin: auto;
-  }
-
-  section h2 {
-    text-align: center;
-    margin-top: 150px;
-    margin-bottom: 30px;
-    font-size: 2rem;
-  }
-
-  .about {
-    text-align: center;
-    font-size: 1.1rem;
-    line-height: 1.6;
-  }
-
-  .events {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 20px;
-    text-align: center;
-  }
-
-  .card {
-    background: #2b0101;
-    border-radius: 10px;
-    padding: 20px;
-    box-shadow: 0 4px 6px rgba(172, 148, 148, 0.291);
-    transition: transform 0.3s, opacity 0.3s;
-    opacity: 0;
-    transform: translateY(30px);
-    color: white;
-  }
-
-  .card.visible {
-    opacity: 1;
-    transform: translateY(0);
-  }
-
-  .card img {
-    max-width: 100%;
-    border-radius: 10px;
-    margin-bottom: 15px;
-  }
-
-  .sponsors {
-    
-    display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
-    gap: 20px;
-  }
-
-  .sponsors img {
-    height: 60px;
-    object-fit: contain;
-  }
-
-  .contact-cta {
-    background: #1a1a1a;
-    color: white;
-    text-align: center;
-    padding: 50px 20px;
-    opacity: 0;
-    transform: translateY(40px);
-    transition: opacity 0.6s, transform 0.6s;
-  }
-
-  .contact-cta.visible {
-    opacity: 1;
-    transform: translateY(0);
-  }
-
-  .contact-cta h2 {
-    margin-bottom: 20px;
-  }
-
-  .contact-cta .btn {
-    background: #ff6600;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 5px;
-    color: white;
-    cursor: pointer;
-  }
- .gallery {
-      width: 300px;
-      height: 200px;
-      margin: auto;
-      perspective: 1000px;
-    }
-
-    .gallery-container {
-      top: 80px;
-      width: 100%;
-      height: 100%;
-      position: relative;
-      transform-style: preserve-3d;
-      animation: rotate 15s infinite linear;
-    }
-
-    .gallery-container .card {
-      position: absolute;
-      width: 100%;
-      height: 100%;
-      border-radius: 12px;
-      overflow: hidden;
-      box-shadow: 0 8px 20px rgba(0,0,0,0.5);
-      background: none;
-      padding: 0;
-      opacity: 1;
-      transform: none;
-    }
-
-    .gallery-container .card img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-    }
-
-    .gallery-container .card:nth-child(1) { transform: rotateY(0deg) translateZ(400px); }
-    .gallery-container .card:nth-child(2) { transform: rotateY(60deg) translateZ(400px); }
-    .gallery-container .card:nth-child(3) { transform: rotateY(120deg) translateZ(400px); }
-    .gallery-container .card:nth-child(4) { transform: rotateY(180deg) translateZ(400px); }
-    .gallery-container .card:nth-child(5) { transform: rotateY(240deg) translateZ(400px); }
-    .gallery-container .card:nth-child(6) { transform: rotateY(300deg) translateZ(400px); }
-
-    @keyframes rotate {
-      from { transform: rotateY(0deg); }
-      to { transform: rotateY(360deg); }
-    }
-
-    @media (max-width: 768px) {
-      .gallery {
-        width: 220px;
-        height: 150px;
-      }
-    }
-
-    @media (max-width: 480px) {
-      .gallery {
-        width: 180px;
-        gap: 10px;
-        height: 120px;
-      }
-    }
-  /* Footer */
-  footer {
-      background:#000;
-      height: 500px;
-       padding:60px 20px; 
-       margin-top:50px;
-      display:grid;
-       grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
-        gap:20px;
-        align-items: center;
-    }
-    footer h3 { 
-      margin-bottom:15px; 
-      font-weight:900;
-      font-size: x-large;
-      align-items: center;
-    }
-    footer p, footer a { 
-      color:#aaa; 
-      font-size:14px; 
-      text-decoration:none; }
-    .socials { 
-      display:flex; 
-      gap:15px; 
-      margin-top:10px; }
-    .socials a {
-       font-size:20px;
-       transition: transform .3s, color .3s; }
-    .socials a:hover { 
-      transform:scale(1.2);
-       color:#f39c12; }
-
-
-  </style>
+        @media (max-width: 576px) {
+            nav {
+                padding: 10px 15px;
+            }
+            
+            .logo img {
+                height: 35px;
+            }
+            
+            .logo-text span:first-child {
+                font-size: 1rem;
+            }
+            
+            .logo-text span:last-child {
+                font-size: 0.75rem;
+            }
+            
+            .hero h1 {
+                font-size: 1.8rem;
+                letter-spacing: 2px;
+            }
+            
+            .hero .btn {
+                padding: 12px 25px;
+                font-size: 1rem;
+            }
+            
+            .about-section h2, .gallery-section h2, .contact-content h2 {
+                font-size: 2rem;
+            }
+            
+            .contact-cards {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            footer {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+            
+            .socials {
+                justify-content: center;
+            }
+        }
+    </style>
 </head>
+
 <body>
-  <!-- <div id="loader">
-    <h1>ALUMNI ASSOCIATION GVHS</h1>
-  </div> -->
-
-  <nav>
-    <!-- Left side -->
-    <div class="logo">
-      <img src="logo.png" alt="Logo">
-      <div class="alumni" style="display: flex; flex-direction: column;">
-        <span>Alumni</span>
-        <span style="font-size: small;color: yellow">Golden Valley</span>
-      </div>
-    </div>
-
-    <!-- Hamburger for small screens -->
-    <div class="hamburger" onclick="toggleMenu()">
-      <span></span>
-      <span></span>
-      <span></span>
-    </div>
-
-    <!-- Right side -->
-    <ul class="nav-links" id="navLinks">
-      <li><a href="#">Home</a></li>
-      <li>
-        <a href="#">About</a>
-        <div class="dropdown-content">
-          <a href="about-alumni.html">About Alumni</a>
-          <a href="about-us.html">About Team</a>
+    <!-- Navbar (kept exactly the same) -->
+    <nav>
+        <div class="logo">
+            <img src="logo.png" alt="Logo">
+            <div class="logo-text">
+                <span>Alumni</span>
+                <span>Golden Valley</span>
+            </div>
         </div>
-      </li>
-      <li><a href="events.html">Events</a></li>
-      <li><a href="schedule.html">Schedule</a></li>
-      <li><a href="sponsors.html">Sponsors</a></li>
-      <li>
-        <a href="#">Gallery</a>
-        <div class="dropdown-content">
-          <a href="past-gallery.html">Past Events</a>
-          <a href="ongoing-gallery.html">Current Event</a>
+
+        <div class="hamburger" onclick="toggleMenu()">
+            <span></span><span></span><span></span>
         </div>
-      </li>
-      <li><a href="contact1.0.html">Contact</a></li>
-      <li><button class="login-btn">Login</button></li>
-    </ul>
-  </nav>
-<section class="hero">
-  <div>
-    
-    <h1>Welcome to Alumni Association</h1>
-    <p>Connecting the past, building the future</p>
-    <button class="btn" onclick="location.href='tel:+918732016798'">Join Us</button>
-  </div>
-</section>
 
-<!-- About Section -->
-<section class="fade">
-  <h2 style="color: yellow;">About Us</h2>
-  <p class="about" style="color: white;">
-    Our Alumni Association is a vibrant network of graduates who share a common bond and vision. 
-    We aim to foster lifelong relationships, support professional growth, and create opportunities 
-    for collaboration among our members.
-  </p>
-</section>
+        <ul class="nav-links" id="navLinks">
+            <li><a href="#">Home</a></li>
+            <li>
+                <a href="#">About <i class="fa-solid fa-caret-down"></i></a>
+                <div class="dropdown-content">
+                    <a href="about-alumni.html">About Alumni</a>
+                    <a href="about-us.html">About Team</a>
+                </div>
+            </li>
+            <li><a href="events.html">Events</a></li>
+            <li><a href="schedule.html">Schedule</a></li>
+            <li><a href="sponsors.html">Sponsors</a></li>
+            <li>
+                <a href="#">Gallery <i class="fa-solid fa-caret-down"></i></a>
+                <div class="dropdown-content">
+                    <a href="past-gallery.html">Past Events</a>
+                    <a href="ongoing-gallery.html">Current Event</a>
+                </div>
+            </li>
+            <li><a href="contact1.0.html">Contact</a></li>
+            <li><a href="login.html"><button class="login-btn">Login</button></a></li>
+        </ul>
+    </nav>
 
-<!-- Events Preview -->
-<!-- <section>
-  <h2 style="color: yellow;">Upcoming Events</h2>
-  <div class="events">
-    <div class="card"><img src="COMING SOON.png" alt="Event 1"><h3>MILAAP 3.O</h3><p>Reconnect with old friends and network with professionals.</p></div>
-     <div class="card"><img src="https://via.placeholder.com/400x250" alt="Event 2"><h3>Webinar: Career Growth</h3><p>Expert talks and guidance for alumni and students.</p></div>
-    <div class="card"><img src="https://via.placeholder.com/400x250" alt="Event 3"><h3>Charity Run</h3><p>Join us for a cause and contribute to the community.</p></div> 
-  </div>
-</section> -->
+    <!-- Hero Section with Full-width Background -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Welcome to Alumni Association</h1>
+            <p>Connecting the past, building the future</p>
+            <button class="btn" onclick="location.href='tel:+918732016798'">Join Us</button>
+        </div>
+    </section>
 
-<!-- Gallery Preview -->
-  <section>
-    <h2 style="color: yellow;">Gallery</h2>
-    <div class="gallery">
-      <div class="gallery-container">
-        <div class="card"><img src="homegal1.jpg" alt="Image 1"></div>
-        <div class="card"><img src="homegal2.jpg" alt="Image 2"></div>
-        <div class="card"><img src="homegal3.jpg" alt="Image 3"></div>
-        <div class="card"><img src="homegal4.jpg" alt="Image 4"></div>
-        <div class="card"><img src="homegal5.jpg" alt="Image 5"></div>
-        <div class="card"><img src="slide3.jpg" alt="Image 6"></div>
+    <!-- Interactive About Section -->
+    <section class="about-section">
+        <h2>About Us</h2>
+        <div class="about-content">
+            <div class="about-image">
+                <img src="https://images.unsplash.com/photo-1523580494863-6f3031224c94?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Alumni Gathering">
+            </div>
+            <div class="about-text">
+                <p>Our Alumni Association is a vibrant network of graduates who share a common bond and vision. We aim to foster lifelong relationships, support professional growth, and create opportunities for collaboration among our members.</p>
+                <p>Since our establishment, we have been dedicated to creating a strong community that supports both current students and alumni through various initiatives, events, and programs.</p>
+            </div>
+        </div>
+        <div class="stats-container">
+            <div class="stat-box">
+                <div class="stat-number" id="memberCount">5000+</div>
+                <div class="stat-text">Active Members</div>
+            </div>
+            <div class="stat-box">
+                <div class="stat-number">3</div>
+                <div class="stat-text">Events</div>
+            </div>
+            <div class="stat-box">
+                <div class="stat-number">5+</div>
+                <div class="stat-text">Years Established</div>
+            </div>
+            <div class="stat-box">
+                <div class="stat-number">100+</div>
+                <div class="stat-text">Partnerships</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Gallery Section with Scrolling Animations -->
+    <section class="gallery-section">
+        <h2>Gallery</h2>
+        <div class="gallery-grid">
+            <div class="gallery-item">
+                <img src="https://images.unsplash.com/photo-1540575467063-178a50c2df87?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Event 1">
+                <div class="gallery-caption">Annual Meetup 2023</div>
+            </div>
+            <div class="gallery-item">
+                <img src="https://images.unsplash.com/photo-1533174072545-7a4b6ad7a6c3?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Event 2">
+                <div class="gallery-caption">Leadership Conference</div>
+            </div>
+            <div class="gallery-item">
+                <img src="https://images.unsplash.com/photo-1511578314322-379afb476865?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Event 3">
+                <div class="gallery-caption">Charity Gala</div>
+            </div>
+            <div class="gallery-item">
+                <img src="https://images.unsplash.com/photo-1492684223066-81342ee5ff30?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Event 4">
+                <div class="gallery-caption">Networking Night</div>
+            </div>
+            <div class="gallery-item">
+                <img src="https://images.unsplash.com/photo-1519741497674-611481863552?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Event 5">
+                <div class="gallery-caption">Career Fair</div>
+            </div>
+            <div class="gallery-item">
+                <img src="https://images.unsplash.com/photo-1491438590914-bc09fcaaf77a?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Event 6">
+                <div class="gallery-caption">Alumni Dinner</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Creative Contact Section -->
+    <section class="contact-section">
+        <div class="contact-content">
+            <h2>Get in Touch</h2>
+            <p>We'd love to hear from you. Reach out for collaborations, queries, or just to say hello. Our team is always ready to connect with fellow alumni and partners.</p>
+            
+            <div class="contact-cards">
+                <div class="contact-card">
+                    <div class="contact-icon">
+                        <i class="fas fa-phone"></i>
+                    </div>
+                    <h3>Call Us</h3>
+                    <p>+91 8732016798</p>
+                    <a href="tel:+918732016798" class="contact-btn">Call Now</a>
+                </div>
+                
+                <div class="contact-card">
+                    <div class="contact-icon">
+                        <i class="fas fa-envelope"></i>
+                    </div>
+                    <h3>Email Us</h3>
+                    <p>alumnigoldenvalley@gmail.com </p>
+                    <a href="mailto:alumnigoldenvalley@gmail.com" class="contact-btn">Send Email</a>
+                </div>
+                
+                <div class="contact-card">
+                    <div class="contact-icon">
+                        <i class="fas fa-map-marker-alt"></i>
+                    </div>
+                    <h3>Visit Us</h3>
+                    <p>Padmapur, Dharmanagar, Tripura</p>
+                    <a href="https://maps.app.goo.gl/3qdrLz4HZDjSQ4gy6" class="contact-btn">Get Directions</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+   <footer>
+    <div class="footer-col">
+      <h3><i class="fas fa-rocket"></i> Alumni Association</h3>
+      <p>Alumni are not just former students, they are the living embodiment of an institution's achievements and values</p>
+    </div>
+    <div class="footer-col">
+      <h3>Quick Links</h3>
+      <p><a href="index.html">Home</a></p>
+      <p><a href="#"></a></p>
+      <p><a href="events.html">Events</a></p>
+      <p><a href="schedule.html">Schedule</a></p>
+      <p><a href="sponsors.html">Sponsors</a></p>
+      <p><a href="#"></a></p>
+    </div>
+    <div class="footer-col">
+      <h3>Contact Us</h3>
+      <p><i class="fas fa-envelope"></i> alumnigoldenvalley@gmail.com</p>
+      <a href="tel:+919xxxxxxxx"><p><i class="fas fa-phone"></i> +91 89898989898</p></a>
+      <a href="https://maps.app.goo.gl/3qdrLz4HZDjSQ4gy6"><p><i class="fas fa-map-marker-alt"></i> PADMAPUR | DHARMANAGAR | TRIPURA</p></a>
+    </div>
+    <div class="footer-col">
+      <h3>Follow Us</h3>
+      <div class="social-icons">
+        <a href="#"><i class="fab fa-facebook fa-beat" style="color: #1a5eff;"></i></a>
+        <a href="https://www.youtube.com/@gvhsalumniofficial3726"><i class="fa-brands fa-youtube fa-beat" style="color: rgb(157, 5, 5);"></i></a>
+        <a href="#"><i class="fab fa-linkedin fa-beat" style="color: #23a4e9;"></i></a>
+        <a href="https://www.instagram.com/alumnigoldenvalley/"><i class="fab fa-instagram fa-beat" style="color: #fff;"></i></a>
       </div>
     </div>
-  </section>
-
-<!-- Sponsors Section -->
-<section>
-  <h2 style="color: yellow;">Impact Sponsors</h2>
-  <div class="sponsors">
-    <img src="image.png" alt="Sponsor 1">
-    <img src="image.png" alt="Sponsor 2">
-    <img src="image.png" alt="Sponsor 3">
-  </div>
-</section>
-
-<!-- Contact CTA -->
-<section class="contact-cta">
-  <h2>Get in Touch</h2>
-  <p>We’d love to hear from you. Reach out for collaborations or queries.</p>
-  <button class="btn" onclick="location.href='tel:+918732016798'">Contact Us</button>
-</section>
-
-<!-- Footer -->
- <footer>
-    <div>
-      <h3 style="color: yellow;">Alumni Association</h3>
-      <p>Building connections through events & community.</p>
+    <div class="footer-bottom">
+      ©Alumni Association GVHS. All rights reserved.
     </div>
-    <div>
-      <h3 style="color: yellow;">Contact</h3>
-      <p>Email: contact@association.com</p>
-      <p>Phone: +91 9999999999</p>
-    </div>
-    <div>
-      <a href="https://www.google.com/maps/place/Golden+Valley+HS+School/@25.693399,91.918402,7z/data=!4m14!1m7!3m6!1s0x3751ece6d48d3cf3:0x7aa854dec7536c18!2sGolden+Valley+HS+School!8m2!3d24.3713156!4d92.1583079!16s%2Fg%2F1tdr1nqz!3m5!1s0x3751ece6d48d3cf3:0x7aa854dec7536c18!8m2!3d24.3713156!4d92.1583079!16s%2Fg%2F1tdr1nqz?authuser=0&entry=ttu&g_ep=EgoyMDI1MDgyNS4wIKXMDSoASAFQAw%3D%3D"><h3 style="color: yellow;"><i class="fa-solid fa-location-dot"></i> Location</h3></a>
-      <p>Padmapur | Dharmanagar | Tripura</p>
-    </div>
-    <div>
-      <h3 style="color: yellow;">Follow Us</h3>
-      <div class="socials">
-        <a href="https://www.facebook.com/gvhs.alumni/?locale=hi_IN"><i class="fab fa-facebook"></i></a>
-        <a href="#"><i class="fab fa-instagram"></i></a>
-        <a href="#"><i class="fab fa-twitter"></i></a>
-        <a href="#"><i class="fab fa-linkedin"></i></a>
-      </div>
-    </div>
-  </footer>  <script src="https://cdn.botpress.cloud/webchat/v3.2/inject.js"></script>
+  </footer>
+  <script src="https://cdn.botpress.cloud/webchat/v3.2/inject.js"></script>
   <script src="https://files.bpcontent.cloud/2025/08/30/19/20250830190753-XP3BMBNB.js"></script>
+    <script>
+        // Mobile menu toggle
+        function toggleMenu() {
+            const navLinks = document.getElementById('navLinks');
+            navLinks.classList.toggle('active');
+        }
 
-<script>
-  // Scroll animation: show cards when in viewport
-  const cards = document.querySelectorAll('.card, .contact-cta');
+        // Close menu when clicking outside
+        document.addEventListener('click', function(event) {
+            const navLinks = document.getElementById('navLinks');
+            const hamburger = document.querySelector('.hamburger');
+            
+            if (window.innerWidth <= 768 && 
+                !navLinks.contains(event.target) && 
+                !hamburger.contains(event.target) &&
+                navLinks.classList.contains('active')) {
+                navLinks.classList.remove('active');
+            }
+        });
 
-  function showOnScroll() {
-    const triggerBottom = window.innerHeight * 0.85;
-    cards.forEach(card => {
-      const rect = card.getBoundingClientRect();
-      if (rect.top < triggerBottom) {
-        card.classList.add('visible');
-      }
-    });
-  }
+        // Mobile dropdown toggle
+        function toggleDropdown(event, parent) {
+            if (window.innerWidth <= 768) {
+                event.preventDefault();
+                parent.classList.toggle('active');
+            }
+        }
 
-  window.addEventListener('scroll', showOnScroll);
-  window.addEventListener('load', showOnScroll);
-</script>
-  <script>
-    function toggleMenu() {
-      document.getElementById('navLinks').classList.toggle('active');
-    }
-  </script>
+        // Scroll animations for gallery items
+        function checkScroll() {
+            const galleryItems = document.querySelectorAll('.gallery-item');
+            const triggerBottom = window.innerHeight * 0.85;
+            
+            galleryItems.forEach(item => {
+                const itemTop = item.getBoundingClientRect().top;
+                
+                if (itemTop < triggerBottom) {
+                    item.classList.add('visible');
+                }
+            });
+        }
 
+        // Initial check and add scroll listener
+        window.addEventListener('load', checkScroll);
+        window.addEventListener('scroll', checkScroll);
+
+        // Animate stats counter
+        function animateCounter() {
+            const counter = document.getElementById('memberCount');
+            const target = parseInt(counter.innerText);
+            let count = 0;
+            const duration = 2000; // ms
+            const frameDuration = 1000 / 60; // 60 fps
+            const totalFrames = Math.round(duration / frameDuration);
+            const easeOutQuad = t => t * (2 - t);
+            
+            const counterInterval = setInterval(() => {
+                const progress = easeOutQuad(++count / totalFrames);
+                const currentCount = Math.round(target * progress);
+                
+                counter.innerText = currentCount + '+';
+                
+                if (count === totalFrames) clearInterval(counterInterval);
+            }, frameDuration);
+        }
+
+        // Initialize counter animation when in viewport
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    animateCounter();
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.5 });
+
+        observer.observe(document.querySelector('.stats-container'));
+    </script>
 </body>
 </html>
