@@ -577,14 +577,7 @@
     }, { threshold: 0.2 });
     hiddenEls.forEach(el => observer.observe(el));
 
-    // Hamburger toggle
-    //  const hamburger = document.getElementById('hamburger');
-    // const menu = document.getElementById('menu');
-
-    // hamburger.addEventListener('click', () => {
-    //   menu.classList.toggle('active');
-    // });
-       function toggleMenu() {
+     function toggleMenu() {
             const navLinks = document.getElementById('navLinks');
             navLinks.classList.toggle('active');
         }
@@ -596,6 +589,20 @@
                 parent.classList.toggle('active');
             }
         }
+
+        // Close menu when clicking outside
+        document.addEventListener('click', function(event) {
+            const navLinks = document.getElementById('navLinks');
+            const hamburger = document.querySelector('.hamburger');
+            
+            if (window.innerWidth <= 768 && 
+                !navLinks.contains(event.target) && 
+                !hamburger.contains(event.target) &&
+                navLinks.classList.contains('active')) {
+                navLinks.classList.remove('active');
+            }
+        });
+
   </script>
 </body>
 </html>
