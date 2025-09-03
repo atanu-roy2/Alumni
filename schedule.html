@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>TEDx Assam University - Event Schedule</title>
+  <title>Alumni.schedule</title>
    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
   <style>
     /* Reset */
@@ -14,7 +14,7 @@
     }
     body {
       font-family: 'Segoe UI', sans-serif;
-      background: #1a1a1a;
+      background: #0c0d11;
       color: #f4f4f4;
       line-height: 1.6;
     }
@@ -243,8 +243,8 @@
       margin-top: 2rem;
     }
     .highlight-box {
-      background: #111;
-      border: 1px solid #e11d48;
+      background: #07426f;
+      border: 1px solid #eeeaeb;
       padding: 2rem;
       border-radius: 12px;
       text-align: center;
@@ -256,7 +256,7 @@
     }
     .highlight-box i {
       font-size: 2rem;
-      color: #e11d48;
+      color: #030d2b;
       margin-bottom: 1rem;
       display: block;
     }
@@ -285,7 +285,7 @@
       content: '';
       position: absolute;
       width: 6px;
-      background: linear-gradient(180deg, #e11d48, #f87171);
+      background: linear-gradient(180deg, #312ee8, #2cbada);
       top: 0;
       bottom: 0;
       left: 50%;
@@ -309,21 +309,21 @@
       background: #111;
       padding: 1.2rem;
       border-radius: 12px;
-      border: 1px solid #333;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.5);
+      border: 1px solid #f8f5f5;
+      box-shadow: 0 4px 10px rgba(32, 105, 173, 0.5);
       transition: transform 0.3s ease, box-shadow 0.3s ease;
     }
     .timeline-content:hover {
       transform: translateY(-5px);
-      box-shadow: 0 6px 18px rgba(225, 29, 72, 0.4);
+      box-shadow: 0 6px 18px rgba(5, 170, 236, 0.4);
     }
     .timeline-item::before {
       content: '';
       position: absolute;
       width: 22px;
       height: 22px;
-      background: #e11d48;
-      border: 3px solid #fff;
+      background: #d6d6df;
+      border: 3px solid #085aac;
       border-radius: 50%;
       top: 20px;
       z-index: 1;
@@ -337,7 +337,7 @@
     }
     .timeline-item:hover::before {
       transform: scale(1.2);
-      background: #be123c;
+      background: #170791;
     }
 
     @media screen and (max-width: 768px) {
@@ -455,7 +455,7 @@
                     <a href="ongoing-gallery.html">Current Event</a>
                 </div>
             </li>
-            <li><a href="contact1.0.html">Contact</a></li>
+            <li><a href="contact01.html">Contact</a></li>
             <li><a href="login.html"><button class="login-btn">Login</button></a></li>
         </ul>
     </nav>
@@ -532,7 +532,7 @@
       <h3><i class="fas fa-rocket"></i> Alumni Association</h3>
       <p>Alumni are not just former students, they are the living embodiment of an institution's achievements and values</p>
     </div>
-    <div class="footer-col" style="padding-left: 100px;">
+    <div class="footer-col">
       <h3>Quick Links</h3>
       <p><a href="index.html">Home</a></p>
       <p><a href="#"></a></p>
@@ -577,11 +577,11 @@
     hiddenEls.forEach(el => observer.observe(el));
 
     // Hamburger toggle
-    const hamburger = document.getElementById('hamburger');
-    const navLinks = document.getElementById('navLinks');
+     const hamburger = document.getElementById('hamburger');
+    const menu = document.getElementById('menu');
 
     hamburger.addEventListener('click', () => {
-      navLinks.classList.toggle('active');
+      menu.classList.toggle('active');
     });
   </script>
 </body>

@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Alimnni.gallery-current</title>
     <link rel="stylesheet" href="upcoming.css">
     <style>
            * {
@@ -17,213 +17,292 @@
       background-color: #111;
     }
 
-    nav {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      background: #1a1a1a;
-      padding: 12px 10px;
-    }
+ nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: #16245f70;
+            padding: 12px 22px;
+            position: sticky;
+            top: 0;
+            color: white;
+            z-index: 1000;
+        }
 
-    /* Left side */
-    .logo {
-      display: flex;
-      align-items: center;
-      color: white;
-      font-size: 1.2rem;
-      font-weight: bold;
-    }
+        .logo {
+            display: flex;
+            align-items: center;
+        }
 
-    .logo img {
-      height: 40px;
-      margin-right: 10px;
-      filter: brightness(25) saturate(20);
-    }
+        .logo img {
+            height: 38px;
+            margin-right: 10px;
+        }
 
-    /* Right side menu */
-    .nav-links {
-      display: flex;
-      align-items: center;
-      list-style: none;
-    }
+        .logo-text {
+            display: flex;
+            flex-direction: column;
+            line-height: 1.2;
+        }
 
-    .nav-links li {
-      position: relative;
-    }
+        .logo-text span:first-child {
+            font-size: 1.2rem;
+            font-weight: 900;
+        }
 
-    .nav-links a {
-      color: white;
-      text-decoration: none;
-      padding: 10px 15px;
-      display: block;
-      font-weight: 700;
-      transition: background 0.3s;
-    }
+        .logo-text span:last-child {
+            font-size: 0.85rem;
+            color: #aaa;
+        }
 
-    .nav-links a:hover {
-      background: #333;
-      border-radius: 5px;
-    }
+        .nav-links {
+            list-style: none;
+            display: flex;
+            align-items: center;
+            gap: 14px;
+        }
 
-    /* Dropdown */
-    .dropdown-content {
-      display: none;
-      position: absolute;
-      top: 100%;
-      left: 0;
-      background: #222;
-      min-width: 160px;
-      border-radius: 5px;
-      z-index: 10;
-    }
+        .nav-links li {
+            position: relative;
+        }
 
-    .dropdown-content a {
-      padding: 10px 15px;
-      white-space: nowrap;
-    }
+        .nav-links li:last-child {
+            margin-left: 280px;
+        }
 
-    .nav-links li:hover .dropdown-content {
-      display: block;
-    }
+        .nav-links a {
+            text-decoration: none;
+            color: white;
+            font-weight: bold;
+            padding: 8px 12px;
+            transition: 0.3s;
+        }
 
-    /* Login button */
-    .login-btn {
-      background: #ff6600;
-      color: white;
-      padding: 8px 18px 8px 18px;
-      border: none;
-      font-size:medium;
-      font-weight: 900;
-      width: 80px;
-      border-radius: 5px;
-      cursor: pointer;
-      transition: background 0.3s;
-      margin-left: 50px; /* <-- extra spacing before login button */
-    }
+        .nav-links a:hover {
+            color: rgba(0, 175, 239, 0.961);
+        }
 
-    .login-btn:hover {
-      background: #e55b00;
-    }
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            top: 110%;
+            left: 0;
+            background: #1a1a1a;
+            border-radius: 6px;
+            min-width: 160px;
+            z-index: 1001;
+        }
 
-    /* Hamburger */
-    .hamburger {
-      display: none;
-      flex-direction: column;
-      cursor: pointer;
-    }
+        .dropdown-content a {
+            display: block;
+            padding: 10px;
+            color: white;
+            font-weight: 500;
+        }
 
-    .hamburger span {
-      height: 3px;
-      width: 25px;
-      background: white;
-      margin: 4px 0;
-      border-radius: 3px;
-    }
+        .dropdown-content a:hover {
+            background: #333;
+        }
+
+        .nav-links li:hover .dropdown-content {
+            display: block;
+        }
+
+      .login-btn {
+            background: rgb(0, 170, 255);
+            color: white;
+            font-weight: 700;
+            padding: 10px 25px;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .login-btn:hover {
+            background: #c70000;
+        }
+
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            gap: 5px;
+        }
+
+        .hamburger span {
+            width: 25px;
+            height: 3px;
+            background: white;
+            border-radius: 3px;
+        }
+
 
     @media (max-width: 768px) {
       .nav-links {
-        position: absolute;
-        top: 60px;
-        right: 0;
-        background: #1a1a1a;
+        position: fixed;
+        top: 65px;
+        right: -100%;
         flex-direction: column;
-        width: 200px;
-        display: none;
+        background: #000;
+        width: 220px;
+        height: calc(100vh - 65px);
+        padding: 20px;
+        transition: right 0.3s ease;
+        overflow-y: auto;
+        gap: 0;
       }
-
+      
       .nav-links.active {
+        right: 0;
         display: flex;
       }
-
+      
       .nav-links li {
         width: 100%;
+        margin: 10px 0;
       }
-
-      .login-btn {
-        margin-left: 0; /* remove extra gap in mobile */
+      
+      .nav-links li:last-child {
+        margin-left: 0;
+        margin-top: 20px;
+      }
+      
+      .dropdown-content {
+        position: static;
+        display: none;
         margin-top: 10px;
+        margin-left: 20px;
+        width: calc(100% - 20px);
       }
-
+      
+      .nav-links li:hover .dropdown-content {
+        display: none;
+      }
+      
+      .nav-links li.active .dropdown-content {
+        display: block;
+      }
+      
       .hamburger {
         display: flex;
       }
     }
-
-    /* footer {
-      background:#000;
-      padding:60px 20px;
-      margin-top:50px;
-      height: 500px;
-      display:grid;
-      justify-content: space-evenly;
-      grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
-      gap:20px;
+    /* Mobile Menu */
+    @media (max-width: 768px) {
+      .menu {
+        display: none;
+        flex-direction: column;
+        background: #fff;
+        position: absolute;
+        top: 60px;
+        right: 20px;
+        width: 200px;
+        border-radius: 6px;
+        box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+        padding: 10px;
+      }
+      .menu li {
+        margin: 10px 0;
+      }
+      .hamburger {
+        display: flex;
+        z-index: 10000;
+      }
+      .menu.active {
+        display: flex;
+      }
+      .dropdown-content {
+        position: static;
+        box-shadow: none;
+        border-radius: 0;
+        z-index: 1000;
+      }
+    }
+      footer {
+      background: #0a0a1a;
+      padding: 50px 80px;
+      color: #ccc;
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+    }
+    .footer-col {
+      flex: 1;
+      margin: 15px;
+      min-width: 250px;
+    }
+    .footer-col h3 {
+      margin-bottom: 20px;
+      color: #fff;
+    }
+    .footer-col p, .footer-col a {
+      color: #aaa;
+      text-decoration: none;
+      font-size: 15px;
+      line-height: 1.6;
+    }
+    .footer-col a:hover {
+      color: red;
+    }
+    .social-icons a {
+      margin-right: 12px;
+      font-size: 20px;
+      color: #fff;
+      transition: color 0.3s ease;
+    }
+    .social-icons a:hover {
+      color: red;
     }
 
-    footer h3 {
-      margin-bottom:15px;
-      font-weight:900;
-      font-size:x-large;
-    }
-
-    footer p, footer a {
-      color:#aaa;
-      font-size:14px;
-    }
-
-    .socials { display:flex; gap:15px; margin-top:10px; }
-    .socials a { font-size:20px; transition: transform .3s, color .3s; }
-    .socials a:hover { transform: scale(1.2); color:#f39c12; }
-
-    @media (max-width: 1024px){
-      .hero .container { grid-template-columns:1fr }
-      .hero-visual { order:-1; height: 46vh }
-    } */
+     .footer-bottom {
+            text-align: center;
+            padding: 20px;
+            border-top: 1px solid #333;
+            margin-top: 30px;
+            font-size: 14px;
+            width: 100%;
+        }
     </style>
 </head>
 <body>
     
-    <nav>
-        <!-- Left side -->
+     <nav>
         <div class="logo">
-          <img src="logo.png" alt="Logo">
-          <div class="alumni" style="display: flex; flex-direction: column;">
-            <span>Alumni</span>
-            <span style="font-size: small;color: yellow">Golden Valley</span>
-          </div>
+            <img src="logo.png" alt="Logo">
+            <div class="logo-text">
+                <span>Alumni</span>
+                <span>Golden Valley</span>
+            </div>
         </div>
-    
-        <!-- Hamburger for small screens -->
+
         <div class="hamburger" onclick="toggleMenu()">
-          <span></span>
-          <span></span>
-          <span></span>
+            <span></span><span></span><span></span>
         </div>
-    
-        <!-- Right side -->
+
         <ul class="nav-links" id="navLinks">
-          <li><a href="index.html">Home</a></li>
-          <li>
-            <a href="#">About</a>
-            <div class="dropdown-content">
-              <a href="about-alumni.html">About Alumni</a>
-              <a href="about-us.html">About Team</a>
-            </div>
-          </li>
-          <li><a href="events.html">Events</a></li>
-          <li><a href="schedule.html">Schedule</a></li>
-          <li><a href="sponsors.html">Sponsors</a></li>
-          <li>
-            <a href="#">Gallery</a>
-            <div class="dropdown-content">
-              <a href="past-gallery.html">Past Events</a>
-              <a href="ongoing-gallery.html">Current Event</a>
-            </div>
-          </li>
-          <li><a href="contact1.0.html">Contact</a></li>
-          <li><button class="login-btn">Login</button></li>
+            <li><a href="index.html">Home</a></li>
+            <li>
+                <a href="#">About</i></a>
+                <div class="dropdown-content">
+                    <a href="about-alumni.html">About Alumni</a>
+                    <a href="about-us.html">About Team</a>
+                </div>
+            </li>
+            <li><a href="events.html">Events</a></li>
+            <li><a href="schedule.html">Schedule</a></li>
+            <li><a href="sponsors.html">Sponsors</a></li>
+            <li>
+                <a href="#">Gallery</i></a>
+                <div class="dropdown-content">
+                    <a href="past-gallery.html">Past Events</a>
+                    <a href="ongoing-gallery.html">Current Event</a>
+                </div>
+            </li>
+            <li><a href="contact01.html">Contact</a></li>
+            <li><a href="login.html"><button class="login-btn">Login</button></a></li>
         </ul>
-      </nav>
+    </nav>
 
  
   <!-- Coming Soon Section -->
