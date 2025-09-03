@@ -220,47 +220,97 @@
             width: 100%;
         }
 
+        /* Responsive styles */
+@media (max-width: 1024px) {
+  .nav-links li:last-child {
+    margin-left: 0; /* prevent huge gap on tablets */
+  }
+}
+
+@media (max-width: 768px) {
+     @media (max-width: 768px) {
+      .nav-links {
+        position: fixed;
+        top: 72px;
+        right: -100%;
+        flex-direction: column;
+        background: #000;
+        width: 280px;
+        height: calc(100vh - 72px);
+        padding: 20px;
+        transition: right 0.3s ease;
+        overflow-y: auto;
+        gap: 15px;
+      }
+      .nav-links.active { right: 0; }
+      .nav-links li { width: 100%; margin: 5px 0; }
+      .dropdown-content {
+        position: static;
+        display: none;
+        margin-top: 10px;
+        margin-left: 20px;
+        width: calc(100% - 20px);
+      }
+      .nav-links li.active .dropdown-content { display: block; }
+      .hamburger { display: flex; }
+    }
+
+  .sponsor-logo {
+    width: 150px; /* scale logos for small screens */
+  }
+
+  footer {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .footer-col {
+    margin: 10px 0;
+  }
+}
+
+
     </style>
 </head>
 <body class="bg-slate-900 text-white relative">
 
     <!-- Fixed Navigation Bar -->
-   <nav>
-        <div class="logo">
-            <img src="logo.png" alt="Logo">
-            <div class="logo-text">
-                <span>Alumni</span>
-                <span>Golden Valley</span>
-            </div>
-        </div>
+ <nav>
+    <div class="logo">
+      <img src="logo.png" alt="Logo">
+      <div class="logo-text">
+        <span>Alumni</span>
+        <span>Golden Valley</span>
+      </div>
+    </div>
 
-        <div class="hamburger" onclick="toggleMenu()">
-            <span></span><span></span><span></span>
-        </div>
+    <div class="hamburger" onclick="toggleMenu()">
+      <span></span><span></span><span></span>
+    </div>
 
-        <ul class="nav-links" id="navLinks">
-            <li><a href="index.html">Home</a></li>
-            <li>
-                <a href="#">About</i></a>
-                <div class="dropdown-content">
-                    <a href="about-alumni.html">About Alumni</a>
-                    <a href="about-us.html">About Team</a>
-                </div>
-            </li>
-            <li><a href="events.html">Events</a></li>
-            <li><a href="schedule.html">Schedule</a></li>
-            <li><a href="sponsors.html">Sponsors</a></li>
-            <li>
-                <a href="#">Gallery</i></a>
-                <div class="dropdown-content">
-                    <a href="past-gallery.html">Past Events</a>
-                    <a href="ongoing-gallery.html">Current Event</a>
-                </div>
-            </li>
-            <li><a href="contact01.html">Contact</a></li>
-            <li><a href="login.html"><button class="login-btn">Login</button></a></li>
-        </ul>
-    </nav>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="index.html">Home</a></li>
+      <li>
+        <a href="#" onclick="toggleDropdown(event, this.parentNode)">About</a>
+        <div class="dropdown-content">
+          <a href="about-alumni.html">About Alumni</a>
+          <a href="about-us.html">About Team</a>
+        </div>
+      </li>
+      <li><a href="events.html">Events</a></li>
+      <li><a href="schedule.html">Schedule</a></li>
+      <li><a href="sponsors.html">Sponsors</a></li>
+      <li>
+        <a href="#" onclick="toggleDropdown(event, this.parentNode)">Gallery</a>
+        <div class="dropdown-content">
+          <a href="past-gallery.html">Past Events</a>
+          <a href="ongoing-gallery.html">Current Event</a>
+        </div>
+      </li>
+      <li><a href="contact01.html">Contact</a></li>
+      <li><a href="login.html"><button class="login-btn">Login</button></a></li>
+    </ul>
+  </nav>
 
     <!-- Main Content -->
     <main class="pt-20">
@@ -283,14 +333,14 @@
                 <div class="flex space-x-16 marquee">
                     <!-- Create placeholder images that match the site's theme -->
                     <!-- Original Set -->
-                    <img src="https://placehold.co/224x100/1e293b/94a3b8?text=Lenskart" alt="Lenskart Logo" class="sponsor-logo w-56 rounded-lg shadow-lg bg-slate-800 p-4 cursor-pointer object-contain"/>
-                    <img src="https://placehold.co/224x100/1e293b/94a3b8?text=Royal+Gems" alt="Royal Gems & Jewels Logo" class="sponsor-logo w-56 rounded-lg shadow-lg bg-slate-800 p-4 cursor-pointer object-contain"/>
-                    <img src="https://placehold.co/224x100/1e293b/94a3b8?text=Sweet+Delights" alt="Sweet Delights Bakery Logo" class="sponsor-logo w-56 rounded-lg shadow-lg bg-slate-800 p-4 cursor-pointer object-contain"/>
-                    <img src="https://placehold.co/224x100/1e293b/94a3b8?text=Gourmet+Bites" alt="Gourmet Bites Restaurant Logo" class="sponsor-logo w-56 rounded-lg shadow-lg bg-slate-800 p-4 cursor-pointer object-contain"/>
-                    <img src="https://placehold.co/224x100/1e293b/94a3b8?text=Pro-Sports+Gear" alt="Pro-Sports Gear Logo" class="sponsor-logo w-56 rounded-lg shadow-lg bg-slate-800 p-4 cursor-pointer object-contain"/>
-                    <img src="https://placehold.co/224x100/1e293b/94a3b8?text=Dell" alt="Dell Logo" class="sponsor-logo w-56 rounded-lg shadow-lg bg-slate-800 p-4 cursor-pointer object-contain"/>
-                    <img src="https://placehold.co/224x100/1e293b/94a3b8?text=Modern+Living" alt="Modern Living Furniture Logo" class="sponsor-logo w-56 rounded-lg shadow-lg bg-slate-800 p-4 cursor-pointer object-contain"/>
-                    <img src="https://placehold.co/224x100/1e293b/94a3b8?text=Global+Mobile" alt="Global Mobile Store Logo" class="sponsor-logo w-56 rounded-lg shadow-lg bg-slate-800 p-4 cursor-pointer object-contain"/>
+                    <img src="lenskart.jpeg" alt="Lenskart Logo" class="sponsor-logo w-56 rounded-lg shadow-lg bg-slate-800 p-4 cursor-pointer object-contain"/>
+                    <img src="game.jpg" alt="Royal Gems & Jewels Logo" class="sponsor-logo w-56 rounded-lg shadow-lg bg-slate-800 p-4 cursor-pointer object-contain"/>
+                    <img src="sponsorphoto.png" alt="Sweet Delights Bakery Logo" class="sponsor-logo w-56 rounded-lg shadow-lg bg-slate-800 p-4 cursor-pointer object-contain"/>
+                    <img src="snapdragon.png" alt="Gourmet Bites Restaurant Logo" class="sponsor-logo w-56 rounded-lg shadow-lg bg-slate-800 p-4 cursor-pointer object-contain"/>
+                    <img src="company.jpg" alt="Pro-Sports Gear Logo" class="sponsor-logo w-56 rounded-lg shadow-lg bg-slate-800 p-4 cursor-pointer object-contain"/>
+                    <img src="nike.png" alt="Dell Logo" class="sponsor-logo w-56 rounded-lg shadow-lg bg-slate-800 p-4 cursor-pointer object-contain"/>
+                    <img src="haldiram.svg" alt="Modern Living Furniture Logo" class="sponsor-logo w-56 rounded-lg shadow-lg bg-slate-800 p-4 cursor-pointer object-contain"/>
+                    <img src="cocacola.png" alt="Global Mobile Store Logo" class="sponsor-logo w-56 rounded-lg shadow-lg bg-slate-800 p-4 cursor-pointer object-contain"/>
                     
                     <!-- Duplicate Set (for seamless loop) -->
                     <img src="https://placehold.co/224x100/1e293b/94a3b8?text=Lenskart" alt="Lenskart Logo" class="sponsor-logo w-56 rounded-lg shadow-lg bg-slate-800 p-4 cursor-pointer object-contain"/>
@@ -703,6 +753,28 @@
                 });
             });
         };
+        
+    function toggleMenu() {
+      const navLinks = document.getElementById('navLinks');
+      navLinks.classList.toggle('active');
+    }
+    function toggleDropdown(event, parent) {
+      if (window.innerWidth <= 768) {
+        event.preventDefault();
+        parent.classList.toggle('active');
+      }
+    }
+    document.addEventListener('click', function(event) {
+      const navLinks = document.getElementById('navLinks');
+      const hamburger = document.querySelector('.hamburger');
+      if (window.innerWidth <= 768 &&
+          !navLinks.contains(event.target) &&
+          !hamburger.contains(event.target) &&
+          navLinks.classList.contains('active')) {
+        navLinks.classList.remove('active');
+      }
+    });
+
 
     </script>
 </body>

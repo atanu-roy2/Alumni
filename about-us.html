@@ -445,7 +445,7 @@
         </div>
 
         <ul class="nav-links" id="navLinks">
-            <li><a href="#">Home</a></li>
+            <li><a href="index.html">Home</a></li>
             <li>
                 <a href="#" onclick="toggleDropdown(event, this.parentNode)">About</a>
                 <div class="dropdown-content">
@@ -457,7 +457,7 @@
             <li><a href="schedule.html">Schedule</a></li>
             <li><a href="sponsors.html">Sponsors</a></li>
             <li>
-                <a href="#">Gallery</i></a>
+                <a href="#" onclick="toggleDropdown(event, this.parentNode)">Gallery</a>
                 <div class="dropdown-content">
                     <a href="past-gallery.html">Past Events</a>
                     <a href="ongoing-gallery.html">Current Event</a>
@@ -597,6 +597,13 @@
     hamburger.addEventListener('click', () => {
       navLinks.classList.toggle('active');
     });
+      function toggleDropdown(event, parent) {
+            if (window.innerWidth <= 768) {
+                event.preventDefault();
+                parent.classList.toggle('active');
+            }
+        }
+
   </script>
 
 </body>
