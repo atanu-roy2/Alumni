@@ -15,18 +15,18 @@
 
         body {
             font-family: Arial, sans-serif;
-            background-color: #111;
+            background-color: #0f172a;
             color: white;
             overflow-x: hidden;
         }
 
-        /* Navbar - kept exactly the same */
-        nav {
+        /* Navbar */
+      nav {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            background: #000;
-            padding: 10px 25px;
+            background: #16245f70;
+            padding: 17px 22px;
             position: sticky;
             top: 0;
             z-index: 1000;
@@ -38,19 +38,19 @@
         }
 
         .logo img {
-            height: 45px;
+            height: 38px;
             margin-right: 10px;
         }
 
         .logo-text {
             display: flex;
             flex-direction: column;
-            line-height: 1.2;
+            line-height: 1;
         }
 
         .logo-text span:first-child {
             font-size: 1.2rem;
-            font-weight: 900;
+            font-weight: 700;
         }
 
         .logo-text span:last-child {
@@ -62,7 +62,7 @@
             list-style: none;
             display: flex;
             align-items: center;
-            gap: 15px;
+            gap: 14px;
         }
 
         .nav-links li {
@@ -76,13 +76,13 @@
         .nav-links a {
             text-decoration: none;
             color: white;
-            font-weight: 600;
+            font-weight: bold;
             padding: 8px 12px;
             transition: 0.3s;
         }
 
         .nav-links a:hover {
-            color: #f33;
+            color: rgba(0, 175, 239, 0.961);
         }
 
         .dropdown-content {
@@ -112,10 +112,10 @@
         }
 
         .login-btn {
-            background: red;
+            background: rgb(0, 170, 255);
             color: white;
             font-weight: 700;
-            padding: 8px 18px;
+            padding: 10px 25px;
             border: none;
             border-radius: 25px;
             cursor: pointer;
@@ -123,7 +123,7 @@
         }
 
         .login-btn:hover {
-            background: #c70000;
+            background: #030303;
         }
 
         .hamburger {
@@ -187,20 +187,22 @@
 
         .hero .btn {
             padding: 15px 30px;
-            background: #ff6600;
+            background: #070dae;
             border: none;
             border-radius: 5px;
             color: white;
             font-size: 1.1rem;
             cursor: pointer;
             transition: all 0.3s;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+            box-shadow: 0 5px 15px rgba(224, 217, 217, 0.935);
         }
 
         .hero .btn:hover {
-            background: #e55b00;
+            background: #f8f6f6;
             transform: translateY(-3px);
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.6);
+            color: rgb(7, 7, 251);
+            font-weight: 900;
+            box-shadow: 0 8px 20px rgba(24, 4, 150, 0.6);
         }
 
         /* About Section with Interactive Elements */
@@ -215,7 +217,7 @@
             text-align: center;
             margin-bottom: 50px;
             font-size: 2.5rem;
-            color: #ffcc00;
+            color: #6fccd7;
         }
 
         .about-content {
@@ -231,18 +233,24 @@
             min-width: 300px;
             border-radius: 10px;
             overflow: hidden;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            box-shadow: 0 10px 30px rgba(33, 75, 122, 0.5);
             transition: transform 0.5s;
+            position: relative;
+            padding-bottom: 56.25%; /* 16:9 Aspect Ratio */
+            height: 0;
+        }
+
+        .about-image iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
         }
 
         .about-image:hover {
             transform: scale(1.03);
-        }
-
-        .about-image img {
-            width: 100%;
-            height: auto;
-            display: block;
         }
 
         .about-text {
@@ -263,21 +271,23 @@
         .stat-box {
             text-align: center;
             padding: 20px;
-            background: rgba(255, 204, 0, 0.1);
+            background: rgb(5, 66, 81);
             border-radius: 10px;
             min-width: 180px;
             transition: transform 0.3s;
+            flex: 1;
+            max-width: 250px;
         }
 
         .stat-box:hover {
             transform: translateY(-10px);
-            background: rgba(255, 204, 0, 0.2);
+            background: rgba(15, 15, 69, 0.732);
         }
 
         .stat-number {
             font-size: 2.5rem;
             font-weight: bold;
-            color: #ffcc00;
+            color: #a4d6e3;
             margin-bottom: 10px;
         }
 
@@ -296,12 +306,12 @@
             text-align: center;
             margin-bottom: 50px;
             font-size: 2.5rem;
-            color: #ffcc00;
+            color: #6fccd7;
         }
 
         .gallery-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
             gap: 25px;
             margin-top: 30px;
         }
@@ -310,7 +320,7 @@
             position: relative;
             border-radius: 10px;
             overflow: hidden;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            box-shadow: 0 5px 15px rgba(130, 195, 232, 0.432);
             opacity: 0;
             transform: translateY(50px);
             transition: opacity 0.8s, transform 0.8s;
@@ -378,17 +388,15 @@
         .contact-content h2 {
             font-size: 2.8rem;
             margin-bottom: 20px;
-            color: #ffcc00;
+            color: #00aeff;
         }
 
         .contact-content p {
-          display: flex;
             font-size: 1.2rem;
             margin-bottom: 40px;
             max-width: 700px;
             margin-left: auto;
             margin-right: auto;
-            justify-content: center;
         }
 
         .contact-cards {
@@ -400,19 +408,22 @@
         }
 
         .contact-card {
-            background: rgba(255, 255, 255, 0.1);
+            background: rgba(20, 79, 107, 0.586);
             backdrop-filter: blur(10px);
             border-radius: 15px;
             padding: 30px;
             width: 250px;
             text-align: center;
             transition: transform 0.3s, box-shadow 0.3s;
-            border: 1px solid rgba(255, 204, 0, 0.3);
+            border: 1px solid rgba(204, 232, 242, 0.3);
+            flex: 1;
+            min-width: 250px;
+            max-width: 320px;
         }
 
         .contact-card:hover {
             transform: translateY(-10px);
-            box-shadow: 0 10px 25px rgba(255, 204, 0, 0.2);
+            box-shadow: 0 10px 25px rgba(102, 195, 229, 0.2);
         }
 
         .contact-icon {
@@ -448,48 +459,56 @@
         }
 
         /* Footer */
-       footer {
-      background: #0a0a1a;
-      padding: 50px 80px;
-      color: #ccc;
-      display: flex;
-      justify-content: space-between;
-      flex-wrap: wrap;
-    }
-    .footer-col {
-      flex: 1;
-      margin: 15px;
-      min-width: 250px;
-    }
-    .footer-col h3 {
-      margin-bottom: 20px;
-      color: #fff;
-    }
-    .footer-col p, .footer-col a {
-      color: #aaa;
-      text-decoration: none;
-      font-size: 15px;
-      line-height: 1.6;
-    }
-    .footer-col a:hover {
-      color: red;
-    }
-    .social-icons a {
-      margin-right: 12px;
-      font-size: 20px;
-      color: #fff;
-      transition: color 0.3s ease;
-    }
-    .social-icons a:hover {
-      color: red;
-    }
-    .footer-bottom {
-      text-align: center;
-      padding: 20px;
-      border-top: 1px solid #333;
-      margin-top: 30px;
-      font-size: 14px;
-    }
+        footer {
+            background: #0a0a1a;
+            padding: 50px 20px;
+            color: #ccc;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+        }
+        
+        .footer-col {
+            flex: 1;
+            margin: 15px;
+            min-width: 250px;
+        }
+        
+        .footer-col h3 {
+            margin-bottom: 20px;
+            color: #fff;
+        }
+        
+        .footer-col p, .footer-col a {
+            color: #aaa;
+            text-decoration: none;
+            font-size: 15px;
+            line-height: 1.6;
+        }
+        
+        .footer-col a:hover {
+            color: red;
+        }
+        
+        .social-icons a {
+            margin-right: 12px;
+            font-size: 20px;
+            color: #fff;
+            transition: color 0.3s ease;
+        }
+        
+        .social-icons a:hover {
+            color: red;
+        }
+        
+        .footer-bottom {
+            text-align: center;
+            padding: 20px;
+            border-top: 1px solid #333;
+            margin-top: 30px;
+            font-size: 14px;
+            width: 100%;
+        }
 
         /* Animations */
         @keyframes fadeIn {
@@ -499,16 +518,17 @@
 
         /* Responsive Design */
         @media (max-width: 1200px) {
-            .nav-links li:last-child {
-                margin-left: 150px;
+            .nav-links {
+                gap: 10px;
+            }
+            
+            .nav-links a {
+                padding: 6px 10px;
+                font-size: 0.9rem;
             }
         }
 
         @media (max-width: 992px) {
-            .nav-links li:last-child {
-                margin-left: 50px;
-            }
-            
             .hero h1 {
                 font-size: 2.8rem;
             }
@@ -516,36 +536,38 @@
             .hero p {
                 font-size: 1.3rem;
             }
+            
+            .about-section, .gallery-section, .contact-section {
+                padding: 80px 20px;
+            }
+            
+            .stat-box {
+                min-width: 160px;
+            }
         }
 
         @media (max-width: 768px) {
             .nav-links {
                 position: fixed;
-                top: 65px;
+                top: 72px;
                 right: -100%;
                 flex-direction: column;
                 background: #000;
-                width: 220px;
-                height: calc(100vh - 65px);
+                width: 280px;
+                height: calc(100vh - 72px);
                 padding: 20px;
                 transition: right 0.3s ease;
                 overflow-y: auto;
-                gap: 0;
+                gap: 15px;
             }
             
             .nav-links.active {
                 right: 0;
-                display: flex;
             }
             
             .nav-links li {
                 width: 100%;
-                margin: 10px 0;
-            }
-            
-            .nav-links li:last-child {
-                margin-left: 0;
-                margin-top: 20px;
+                margin: 5px 0;
             }
             
             .dropdown-content {
@@ -554,10 +576,6 @@
                 margin-top: 10px;
                 margin-left: 20px;
                 width: calc(100% - 20px);
-            }
-            
-            .nav-links li:hover .dropdown-content {
-                display: contents;
             }
             
             .nav-links li.active .dropdown-content {
@@ -586,13 +604,33 @@
             }
             
             .gallery-grid {
-                grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+                grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            }
+            
+            .contact-cards {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            footer {
+                flex-direction: column;
+                padding: 30px 20px;
+            }
+            
+            .footer-col {
+                margin: 10px 0;
+                text-align: center;
+            }
+            
+            .social-icons {
+                justify-content: center;
+                display: flex;
             }
         }
 
         @media (max-width: 576px) {
             nav {
-                padding: 10px 15px;
+                padding: 12px 15px;
             }
             
             .logo img {
@@ -621,25 +659,29 @@
                 font-size: 2rem;
             }
             
-            .contact-cards {
-                flex-direction: column;
-                align-items: center;
+            .stat-box {
+                min-width: 140px;
+                padding: 15px;
             }
             
-            footer {
+            .stat-number {
+                font-size: 2rem;
+            }
+            
+            .gallery-grid {
                 grid-template-columns: 1fr;
-                text-align: center;
             }
             
-            .socials {
-                justify-content: center;
+            .contact-card {
+                width: 100%;
+                max-width: none;
             }
         }
     </style>
 </head>
 
 <body>
-    <!-- Navbar (kept exactly the same) -->
+    <!-- Navbar -->
     <nav>
         <div class="logo">
             <img src="logo.png" alt="Logo">
@@ -656,7 +698,7 @@
         <ul class="nav-links" id="navLinks">
             <li><a href="#">Home</a></li>
             <li>
-                <a href="#">About </i></a>
+                <a href="#" onclick="toggleDropdown(event, this.parentNode)">About</a>
                 <div class="dropdown-content">
                     <a href="about-alumni.html">About Alumni</a>
                     <a href="about-us.html">About Team</a>
@@ -666,13 +708,13 @@
             <li><a href="schedule.html">Schedule</a></li>
             <li><a href="sponsors.html">Sponsors</a></li>
             <li>
-                <a href="#">Gallery</i></a>
+                <a href="#" onclick="toggleDropdown(event, this.parentNode)">Gallery</a>
                 <div class="dropdown-content">
                     <a href="past-gallery.html">Past Events</a>
                     <a href="ongoing-gallery.html">Current Event</a>
                 </div>
             </li>
-            <li><a href="contact1.0.html">Contact</a></li>
+            <li><a href="contact01.html">Contact</a></li>
             <li><a href="login.html"><button class="login-btn">Login</button></a></li>
         </ul>
     </nav>
@@ -691,7 +733,7 @@
         <h2>About Us</h2>
         <div class="about-content">
             <div class="about-image">
-                <img src="https://images.unsplash.com/photo-1523580494863-6f3031224c94?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Alumni Gathering">
+                <iframe width="560" height="315" src="https://www.youtube.com/embed/CYVUtAHwPDg?si=CkWaWXic3GbjQm0H&amp;start=10" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
             </div>
             <div class="about-text">
                 <p>Our Alumni Association is a vibrant network of graduates who share a common bond and vision. We aim to foster lifelong relationships, support professional growth, and create opportunities for collaboration among our members.</p>
@@ -787,46 +829,54 @@
     </section>
 
     <!-- Footer -->
-   <footer>
-    <div class="footer-col">
-      <h3><i class="fas fa-rocket"></i> Alumni Association</h3>
-      <p>Alumni are not just former students, they are the living embodiment of an institution's achievements and values</p>
-    </div>
-    <div class="footer-col">
-      <h3>Quick Links</h3>
-      <p><a href="index.html">Home</a></p>
-      <p><a href="#"></a></p>
-      <p><a href="events.html">Events</a></p>
-      <p><a href="schedule.html">Schedule</a></p>
-      <p><a href="sponsors.html">Sponsors</a></p>
-      <p><a href="#"></a></p>
-    </div>
-    <div class="footer-col">
-      <h3>Contact Us</h3>
-      <p><i class="fas fa-envelope"></i> alumnigoldenvalley@gmail.com</p>
-      <a href="tel:+919xxxxxxxx"><p><i class="fas fa-phone"></i> +91 89898989898</p></a>
-      <a href="https://maps.app.goo.gl/3qdrLz4HZDjSQ4gy6"><p><i class="fas fa-map-marker-alt"></i> PADMAPUR | DHARMANAGAR | TRIPURA</p></a>
-    </div>
-    <div class="footer-col">
-      <h3>Follow Us</h3>
-      <div class="social-icons">
-        <a href="#"><i class="fab fa-facebook fa-beat" style="color: #1a5eff;"></i></a>
-        <a href="https://www.youtube.com/@gvhsalumniofficial3726"><i class="fa-brands fa-youtube fa-beat" style="color: rgb(157, 5, 5);"></i></a>
-        <a href="#"><i class="fab fa-linkedin fa-beat" style="color: #23a4e9;"></i></a>
-        <a href="https://www.instagram.com/alumnigoldenvalley/"><i class="fab fa-instagram fa-beat" style="color: #fff;"></i></a>
-      </div>
-    </div>
-    <div class="footer-bottom">
-      ©Alumni Association GVHS. All rights reserved.
-    </div>
-  </footer>
-  <script src="https://cdn.botpress.cloud/webchat/v3.2/inject.js"></script>
-  <script src="https://files.bpcontent.cloud/2025/08/30/19/20250830190753-XP3BMBNB.js"></script>
+    <footer>
+        <div class="footer-col">
+            <h3><i class="fas fa-rocket"></i> Alumni Association</h3>
+            <p>Alumni are not just former students, they are the living embodiment of an institution's achievements and values</p>
+        </div>
+        <div class="footer-col" style="padding-left: 100px;">
+            <h3>Quick Links</h3>
+            <p><a href="index.html">Home</a></p>
+            <p><a href="events.html">Events</a></p>
+            <p><a href="schedule.html">Schedule</a></p>
+            <p><a href="sponsors.html">Sponsors</a></p>
+        </div>
+        <div class="footer-col">
+            <h3>Contact Us</h3>
+            <p><i class="fas fa-envelope"></i> alumnigoldenvalley@gmail.com</p>
+            <a href="tel:+919xxxxxxxx"><p><i class="fas fa-phone"></i> +91 89898989898</p></a>
+            <a href="https://maps.app.goo.gl/3qdrLz4HZDjSQ4gy6"><p><i class="fas fa-map-marker-alt"></i> PADMAPUR | DHARMANAGAR | TRIPURA</p></a>
+        </div>
+        <div class="footer-col">
+            <h3>Follow Us</h3>
+            <div class="social-icons">
+                <a href="https://www.facebook.com/gvhs.alumni/"><i class="fab fa-facebook fa-beat" style="color: #1a5eff;"></i></a>
+                <a href="https://www.youtube.com/@gvhsalumniofficial3726"><i class="fa-brands fa-youtube fa-beat" style="color: rgb(157, 5, 5);"></i></a>
+                <a href="#"><i class="fab fa-linkedin fa-beat" style="color: #23a4e9;"></i></a>
+                <a href="https://www.instagram.com/alumnigoldenvalley/"><i class="fab fa-instagram fa-beat" style="color: #fff;"></i></a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            ©Alumni Association GVHS. All rights reserved.
+        </div>
+    </footer>
+
+    <script src="https://cdn.botpress.cloud/webchat/v3.2/inject.js"></script>
+    <script src="https://files.bpcontent.cloud/2025/08/30/19/20250830190753-XP3BMBNB.js"></script>
+    
     <script>
         // Mobile menu toggle
         function toggleMenu() {
             const navLinks = document.getElementById('navLinks');
             navLinks.classList.toggle('active');
+        }
+
+        // Mobile dropdown toggle
+        function toggleDropdown(event, parent) {
+            if (window.innerWidth <= 768) {
+                event.preventDefault();
+                parent.classList.toggle('active');
+            }
         }
 
         // Close menu when clicking outside
@@ -841,14 +891,6 @@
                 navLinks.classList.remove('active');
             }
         });
-
-        // Mobile dropdown toggle
-        function toggleDropdown(event, parent) {
-            if (window.innerWidth <= 768) {
-                event.preventDefault();
-                parent.classList.toggle('active');
-            }
-        }
 
         // Scroll animations for gallery items
         function checkScroll() {
