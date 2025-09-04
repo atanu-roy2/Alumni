@@ -3,144 +3,400 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Team Page</title>
+  <title>Our Teams | Alumni Golden Valley</title>
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
   <style>
-    /* Reset */
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
+    body {
+      font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      background-color: #030a26;
+      color: #fff;
+      line-height: 1.6;
+      scroll-behavior: smooth;
     }
 
-    body {
-      font-family: Arial, sans-serif;
-      background: #080808;
+    a { color: inherit; text-decoration: none; }
+
+    /* ====== NAVBAR ====== */
+    nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: #16245f70;
+      padding: 0px 22px;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      backdrop-filter: blur(5px);
+    }
+    
+    .logo {
+      display: flex;
+      align-items: center;
+    }
+
+    .logo img {
+      height: 38px;
+      margin-right: 10px;
+    }
+
+    .logo-text {
+      display: flex;
+      flex-direction: column;
+      line-height: 1;
+    }
+
+    .logo-text span:first-child {
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: #fff;
+    }
+
+    .logo-text span:last-child {
+      font-size: 0.85rem;
+      color: #aaa;
+    }
+
+    .nav-links {
+      list-style: none;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .nav-links li {
+      position: relative;
+    }
+
+    .nav-links li:last-child {
+      margin-left: 280px;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      color: white;
+      font-weight: bold;
+      padding: 8px 12px;
+      transition: 0.3s;
+    }
+
+    .nav-links a:hover {
+      color: rgba(0, 175, 239, 0.961);
+    }
+
+    .dropdown-content {
+      display: none;
+      position: absolute;
+      top: 110%;
+      left: 0;
+      background: #1a1a1a;
+      border-radius: 6px;
+      min-width: 160px;
+      z-index: 1001;
+    }
+
+    .dropdown-content a {
+      display: block;
+      padding: 10px;
+      color: white;
+      font-weight: 500;
+    }
+
+    .dropdown-content a:hover {
+      background: #333;
+    }
+
+    .nav-links li:hover .dropdown-content {
+      display: block;
+    }
+
+    .login-btn {
+      background: rgb(0, 170, 255);
+      color: white;
+      font-weight: 700;
+      padding: 10px 25px;
+      border: none;
+      border-radius: 25px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    .login-btn:hover {
+      background: #030303;
+    }
+
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      cursor: pointer;
+      gap: 5px;
+    }
+
+    .hamburger span {
+      width: 25px;
+      height: 3px;
+      background: white;
+      border-radius: 3px;
+    }
+
+    /* ====== TEAM SECTIONS ====== */
+    .teams-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 40px 20px;
+    }
+
+    .page-title {
+      text-align: center;
+      font-size: 2.8rem;
+      margin-bottom: 20px;
+      background: linear-gradient(to right, #00aaff, #0055ff);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      position: relative;
+      padding-bottom: 15px;
+    }
+
+    .page-title::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 100px;
+      height: 4px;
+      background: linear-gradient(to right, #00aaff, #0055ff);
+      border-radius: 2px;
+    }
+
+    .page-subtitle {
+      text-align: center;
+      color: #ccc;
+      margin-bottom: 50px;
+      font-size: 1.2rem;
+      max-width: 800px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .team-category {
+      margin-bottom: 60px;
+      padding: 30px;
+      background: rgba(255, 255, 255, 0.03);
+      border-radius: 15px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    }
+
+    .category-title {
+      font-size: 2rem;
+      margin-bottom: 30px;
+      text-align: center;
+      color: #fff;
+      position: relative;
+      padding-bottom: 15px;
+    }
+
+    .category-title::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 60px;
+      height: 3px;
+      background: linear-gradient(to right, #00aaff, #0055ff);
+      border-radius: 2px;
+    }
+
+    .team-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 30px;
+    }
+
+    .team-member {
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 15px;
+      overflow: hidden;
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      transition: transform 0.4s ease, box-shadow 0.4s ease;
+      animation: fadeIn 0.6s ease-out forwards;
+      opacity: 0;
+      transform: translateY(20px);
+    }
+
+    .team-member:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 15px 30px rgba(0, 85, 255, 0.2);
+    }
+
+    .member-img {
+      width: 100%;
+      height: 250px;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .member-img img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.5s ease;
+    }
+
+    .team-member:hover .member-img img {
+      transform: scale(1.1);
+    }
+
+    .member-info {
+      padding: 20px;
+      text-align: center;
+      color: #fff;
+    }
+
+    .member-name {
+      font-size: 1.4rem;
+      margin-bottom: 5px;
+      color: #fff;
+    }
+
+    .member-role {
+      color: #00aaff;
+      font-weight: 600;
+      margin-bottom: 15px;
+      font-size: 0.9rem;
+    }
+
+    .member-desc {
+      color: #ccc;
+      font-size: 0.9rem;
+      line-height: 1.6;
+      margin-bottom: 20px;
+    }
+
+    .social-links {
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+    }
+
+    .social-links a {
+      width: 35px;
+      height: 35px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.1);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+      transition: all 0.3s ease;
+    }
+
+    .social-links a:hover {
+      background: #00aaff;
+      transform: translateY(-3px);
+    }
+
+    /* Animation for cards */
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* Color coding for teams */
+    .core-team .category-title::after { background: linear-gradient(to right, #ff3366, #ff3366); }
+    .core-team .member-role { color: #ff3366; }
+    .core-team .social-links a:hover { background: #ff3366; }
+
+    .tech-team .category-title::after { background: linear-gradient(to right, #00cc99, #00cc99); }
+    .tech-team .member-role { color: #00cc99; }
+    .tech-team .social-links a:hover { background: #00cc99; }
+
+    .cultural-team .category-title::after { background: linear-gradient(to right, #ffcc00, #ffcc00); }
+    .cultural-team .member-role { color: #ffcc00; }
+    .cultural-team .social-links a:hover { background: #ffcc00; }
+
+    .finance-team .category-title::after { background: linear-gradient(to right, #9966ff, #9966ff); }
+    .finance-team .member-role { color: #9966ff; }
+    .finance-team .social-links a:hover { background: #9966ff; }
+
+    .media-team .category-title::after { background: linear-gradient(to right, #ff6600, #ff6600); }
+    .media-team .member-role { color: #ff6600; }
+    .media-team .social-links a:hover { background: #ff6600; }
+
+    .sponsor-team .category-title::after { background: linear-gradient(to right, #00ccff, #00ccff); }
+    .sponsor-team .member-role { color: #00ccff; }
+    .sponsor-team .social-links a:hover { background: #00ccff; }
+
+    /* ====== FOOTER ====== */
+    footer {
+      background: #0a0a1a;
+      padding: 50px 80px;
+      color: #ccc;
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+    }
+    .footer-col {
+      flex: 1;
+      margin: 15px;
+      min-width: 250px;
+    }
+    .footer-col h3 {
+      margin-bottom: 20px;
+      color: #fff;
+    }
+    .footer-col p, .footer-col a {
+      color: #aaa;
+      text-decoration: none;
+      font-size: 15px;
       line-height: 1.6;
     }
+    .footer-col a:hover {
+      color: red;
+    }
+    .social-icons a {
+      margin-right: 12px;
+      font-size: 20px;
+      color: #fff;
+      transition: color 0.3s ease;
+    }
+    .social-icons a:hover {
+      color: red;
+    }
+    .footer-bottom {
+      text-align: center;
+      padding: 20px;
+      border-top: 1px solid #333;
+      margin-top: 30px;
+      font-size: 14px;
+      width: 100%;
+    }
 
-    /* Navbar */
- nav {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            background: #16245f70;
-            padding: 12px 22px;
-            position: sticky;
-            top: 0;
-            color: white;
-            z-index: 1000;
-        }
+    /* ====== RESPONSIVE DESIGN ====== */
+    @media (max-width: 1200px) {
+      .nav-links li:last-child {
+        margin-left: 150px;
+      }
+    }
 
-        .logo {
-            display: flex;
-            align-items: center;
-        }
-
-        .logo img {
-            height: 38px;
-            margin-right: 10px;
-        }
-
-        .logo-text {
-            display: flex;
-            flex-direction: column;
-            line-height: 1.2;
-        }
-
-        .logo-text span:first-child {
-            font-size: 1.2rem;
-            font-weight: 900;
-        }
-
-        .logo-text span:last-child {
-            font-size: 0.85rem;
-            color: #aaa;
-        }
-
-        .nav-links {
-            list-style: none;
-            display: flex;
-            align-items: center;
-            gap: 14px;
-        }
-
-        .nav-links li {
-            position: relative;
-        }
-
-        .nav-links li:last-child {
-            margin-left: 280px;
-        }
-
-        .nav-links a {
-            text-decoration: none;
-            color: white;
-            font-weight: bold;
-            padding: 8px 12px;
-            transition: 0.3s;
-        }
-
-        .nav-links a:hover {
-            color: rgba(0, 175, 239, 0.961);
-        }
-
-        .dropdown-content {
-            display: none;
-            position: absolute;
-            top: 110%;
-            left: 0;
-            background: #1a1a1a;
-            border-radius: 6px;
-            min-width: 160px;
-            z-index: 1001;
-        }
-
-        .dropdown-content a {
-            display: block;
-            padding: 10px;
-            color: white;
-            font-weight: 500;
-        }
-
-        .dropdown-content a:hover {
-            background: #333;
-        }
-
-        .nav-links li:hover .dropdown-content {
-            display: block;
-        }
-
-      .login-btn {
-            background: rgb(0, 170, 255);
-            color: white;
-            font-weight: 700;
-            padding: 10px 25px;
-            border: none;
-            border-radius: 25px;
-            cursor: pointer;
-            transition: 0.3s;
-        }
-
-        .login-btn:hover {
-            background: #c70000;
-        }
-
-        .hamburger {
-            display: none;
-            flex-direction: column;
-            cursor: pointer;
-            gap: 5px;
-        }
-
-        .hamburger span {
-            width: 25px;
-            height: 3px;
-            background: white;
-            border-radius: 3px;
-        }
-
-
+    @media (max-width: 992px) {
+      .nav-links li:last-child {
+        margin-left: 50px;
+      }
+      
+      .team-grid {
+        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+      }
+    }
+    
     @media (max-width: 768px) {
       .nav-links {
         position: fixed;
@@ -190,371 +446,445 @@
       .hamburger {
         display: flex;
       }
-    }
-    /* Mobile Menu */
-    @media (max-width: 768px) {
-      .menu {
-        display: none;
-        flex-direction: column;
-        background: #fff;
-        position: absolute;
-        top: 60px;
-        right: 20px;
-        width: 200px;
-        border-radius: 6px;
-        box-shadow: 0 2px 6px rgba(0,0,0,0.2);
-        padding: 10px;
+      
+      .teams-container {
+        padding: 30px 15px;
       }
-      .menu li {
-        margin: 10px 0;
+      
+      .page-title {
+        font-size: 2.2rem;
       }
-      .hamburger {
-        display: flex;
-        z-index: 10000;
+      
+      .category-title {
+        font-size: 1.8rem;
       }
-      .menu.active {
-        display: flex;
-      }
-      .dropdown-content {
-        position: static;
-        box-shadow: none;
-        border-radius: 0;
-        z-index: 1000;
-      }
-    }
+      
       footer {
-      background: #0a0a1a;
-      padding: 50px 80px;
-      color: #ccc;
-      display: flex;
-      justify-content: space-between;
-      flex-wrap: wrap;
+        padding: 40px 20px;
+      }
     }
-    .footer-col {
-      flex: 1;
-      margin: 15px;
-      min-width: 250px;
-    }
-    .footer-col h3 {
-      margin-bottom: 20px;
-      color: #fff;
-    }
-    .footer-col p, .footer-col a {
-      color: #aaa;
-      text-decoration: none;
-      font-size: 15px;
-      line-height: 1.6;
-    }
-    .footer-col a:hover {
-      color: red;
-    }
-    .social-icons a {
-      margin-right: 12px;
-      font-size: 20px;
-      color: #fff;
-      transition: color 0.3s ease;
-    }
-    .social-icons a:hover {
-      color: red;
-    }
-
-     .footer-bottom {
-            text-align: center;
-            padding: 20px;
-            border-top: 1px solid #333;
-            margin-top: 30px;
-            font-size: 14px;
-            width: 100%;
-        }
-
-    /* Section Titles */
-    section {
-      padding: 60px 20px;
-      text-align: center;
-    }
-
-    section h2 {
-      font-size: 28px;
-      margin-bottom: 30px;
-      color: #efa40d;
-    }
-
-    /* Cards Layout */
-    .cards-wrapper {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 30px;
-      justify-items: center;
-      width: 100%;
-      margin: 0 auto;
-      padding: 20px 0;
-    }
-
-    .container {
-      width: 100%;
-      max-width: 350px;
-      height: 500px;
-      box-shadow: 0 4px 12px rgba(234, 227, 227, 0.878);
-      position: relative;
-      overflow: hidden;
-      background: transparent;
-      border-radius: 10px;
-    }
-
-    .container .image img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      position: absolute;
-      top: 0;
-      left: 0;
-      transition: 0.5s ease-in-out;
-    }
-
-    .container:hover .image img { 
-      border-radius: 50%;  
-      width: 150px;
-      height: 150px;
-      top: 25%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      object-fit: cover;
-    }
-
-    .container .content {
-      position: absolute;
-      top: 45%;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 85%;
-      text-align: center;
-      display: none;
-      transition: 0.5s ease-in-out;
-    }
-
-    .container:hover .content {
-      display: block;
-    }
-
-    .container button {
-      width: 140px;
-      height: 45px;
-      margin-top: 15px;
-      border: none;
-      background-color: rgb(241, 236, 236);
-      color: white;
-      border-radius: 25px;
-      cursor: pointer;
-      transition: 0.3s;
-    }
-
-    .container button:hover {
-      background: #444;
-    }
-
-    .media {
-      display: flex;
-      justify-content: center;
-      gap: 25px;
-      position: absolute;
-      bottom: 20px;
-      left: 50%;
-      transform: translateX(-50%);
-      opacity: 0;
-      transition: 0.5s ease-in-out;
-    }
-
-    .container:hover .media {
-      opacity: 1;
-    }
-
-    .media li {
-      list-style: none;
-    }
-
-    .empty {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 250px;
-      background-color: rgb(239, 236, 236);
-      z-index: -1;
-      display: none;
-      transition: 1s ease-in-out;
-      clip-path: polygon(0 0, 100% 0, 100% 33%, 0 76%);
-    }
-
-    .container:hover .empty {
-      display: block;
-    }
-    .content h3{
-      color: white;
-    }
-    .media i{
-      color: yellow;
-      height: 20px;
-    }
-
-    /* Join Us Section */
-    .join {
-      padding: 50px 20px;
-      background: rgb(237, 233, 233);
-      color: white;
-      text-align: center;
-    }
-
-    .join button {
-      padding: 12px 25px;
-      border: none;
-      background: white;
-      color: rgb(138, 12, 12);
-      border-radius: 25px;
-      font-size: 16px;
-      cursor: pointer;
-      margin-top: 15px;
-    }
-
-    .join button:hover {
-      background: #ddd;
-    }
-
-    /* Footer Placeholder */
-   
-
-    @media (max-width: 1024px){
-      .hero .container { grid-template-columns:1fr }
-      .hero-visual { order:-1; height: 46vh }
+      
+    @media (max-width: 576px) {
+      nav {
+        padding: 10px 15px;
+      }
+      
+      .logo img {
+        height: 35px;
+      }
+      
+      .logo-text span:first-child {
+        font-size: 1rem;
+      }
+      
+      .logo-text span:last-child {
+        font-size: 0.75rem;
+      }
+        
+      footer {
+        grid-template-columns: 1fr;
+        text-align: center;
+      }
+      
+      .socials {
+        justify-content: center;
+      }
+      
+      .team-grid {
+        grid-template-columns: 1fr;
+      }
+      
+      .page-title {
+        font-size: 1.8rem;
+      }
+      
+      .category-title {
+        font-size: 1.6rem;
+      }
+      
+      .team-category {
+        padding: 20px 15px;
+      }
     }
   </style>
 </head>
 <body>
+  <!-- Navbar -->
+  <nav>
+    <div class="logo">
+      <img src="logo.png" alt="Logo">
+      <div class="logo-text">
+        <span>Alumni</span>
+        <span>Golden Valley</span>
+      </div>
+    </div>
 
-   <!-- NAVBAR -->
- <nav>
-        <div class="logo">
-            <img src="logo.png" alt="Logo">
-            <div class="logo-text">
-                <span>Alumni</span>
-                <span>Golden Valley</span>
+    <div class="hamburger" onclick="toggleMenu()">
+      <span></span><span></span><span></span>
+    </div>
+
+    <ul class="nav-links" id="navLinks">
+      <li><a href="index.html">Home</a></li>
+      <li>
+        <a href="#" onclick="toggleDropdown(event, this.parentNode)">About</a>
+        <div class="dropdown-content">
+          <a href="about-alumni.html">About Alumni</a>
+          <a href="about-us.html">About Team</a>
+        </div>
+      </li>
+      <li><a href="events.html">Events</a></li>
+      <li><a href="schedule.html">Schedule</a></li>
+      <li><a href="sponsors.html">Sponsors</a></li>
+      <li>
+        <a href="#" onclick="toggleDropdown(event, this.parentNode)">Gallery</a>
+        <div class="dropdown-content">
+          <a href="past-gallery.html">Past Events</a>
+          <a href="ongoing-gallery.html">Current Event</a>
+        </div>
+      </li>
+      <li><a href="contact01.html">Contact</a></li>
+      <li><a href="login.html"><button class="login-btn">Login</button></a></li>
+    </ul>
+  </nav>
+  
+  <!-- Teams Container -->
+  <div class="teams-container">
+    <h1 class="page-title">Our Amazing Team</h1>
+    <p class="page-subtitle">Meet the dedicated individuals who work tirelessly to make our alumni community vibrant and connected.</p>
+    
+    <!-- Core Team -->
+    <section class="team-category core-team">
+      <h2 class="category-title">Core Team</h2>
+      <div class="team-grid">
+        <div class="team-member">
+          <div class="member-img">
+            <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=774&q=80" alt="President">
+          </div>
+          <div class="member-info">
+            <h3 class="member-name">John Smith</h3>
+            <p class="member-role">President</p>
+            <p class="member-desc">Leading the alumni association with vision and dedication since 2020.</p>
+            <div class="social-links">
+              <a href="#"><i class="fab fa-facebook-f"></i></a>
+              <a href="#"><i class="fab fa-twitter"></i></a>
+              <a href="#"><i class="fab fa-linkedin-in"></i></a>
             </div>
+          </div>
         </div>
-
-        <div class="hamburger" onclick="toggleMenu()">
-            <span></span><span></span><span></span>
+        
+        <div class="team-member">
+          <div class="member-img">
+            <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?ixlib=rb-4.0.3&auto=format&fit=crop&w=776&q=80" alt="Vice President">
+          </div>
+          <div class="member-info">
+            <h3 class="member-name">Sarah Johnson</h3>
+            <p class="member-role">Vice President</p>
+            <p class="member-desc">Supporting the president and ensuring smooth operations of all activities.</p>
+            <div class="social-links">
+              <a href="#"><i class="fab fa-facebook-f"></i></a>
+              <a href="#"><i class="fab fa-twitter"></i></a>
+              <a href="#"><i class="fab fa-linkedin-in"></i></a>
+            </div>
+          </div>
         </div>
-
-        <ul class="nav-links" id="navLinks">
-            <li><a href="index.html">Home</a></li>
-            <li>
-                <a href="#" onclick="toggleDropdown(event, this.parentNode)">About</a>
-                <div class="dropdown-content">
-                    <a href="about-alumni.html">About Alumni</a>
-                    <a href="about-us.html">About Team</a>
-                </div>
-            </li>
-            <li><a href="events.html">Events</a></li>
-            <li><a href="schedule.html">Schedule</a></li>
-            <li><a href="sponsors.html">Sponsors</a></li>
-            <li>
-                <a href="#" onclick="toggleDropdown(event, this.parentNode)">Gallery</a>
-                <div class="dropdown-content">
-                    <a href="past-gallery.html">Past Events</a>
-                    <a href="ongoing-gallery.html">Current Event</a>
-                </div>
-            </li>
-            <li><a href="contact01.html">Contact</a></li>
-            <li><a href="login.html"><button class="login-btn">Login</button></a></li>
-        </ul>
-    </nav>
-
-
-  <!-- About Section -->
-  <section>
-    <h2>About the Team</h2>
-    <p style="color: #fff;">We are a passionate group working together to organize impactful events and create memorable experiences.</p>
-  </section>
-
-  <!-- Core Team -->
-  <section>
-    <h2>Core Team</h2>
-    <div class="cards-wrapper">
-      <div class="container">
-        <div class="image"><img src="team.jpeg" alt=""></div>
-        <div class="content"><h3>President</h3></div>
-        <ul class="media"><li><i class="fab fa-linkedin"></i></li></ul>
-        <div class="empty"></div>
+        
+        <div class="team-member">
+          <div class="member-img">
+            <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?ixlib=rb-4.0.3&auto=format&fit=crop&w=774&q=80" alt="Secretary">
+          </div>
+          <div class="member-info">
+            <h3 class="member-name">Michael Brown</h3>
+            <p class="member-role">Secretary</p>
+            <p class="member-desc">Maintaining records and facilitating communication between team members.</p>
+            <div class="social-links">
+              <a href="#"><i class="fab fa-facebook-f"></i></a>
+              <a href="#"><i class="fab fa-twitter"></i></a>
+              <a href="#"><i class="fab fa-linkedin-in"></i></a>
+            </div>
+          </div>
+        </div>
       </div>
-      <div class="container">
-        <div class="image"><img src="team2.jpeg" alt=""></div>
-        <div class="content"><h3>Vice President</h3></div>
-        <ul class="media"><li><i class="fab fa-linkedin"></i></li></ul>
-        <div class="empty"></div>
+    </section>
+    
+    <!-- Tech Team -->
+    <section class="team-category tech-team">
+      <h2 class="category-title">Tech Team</h2>
+      <div class="team-grid">
+        <div class="team-member">
+          <div class="member-img">
+            <img src="https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?ixlib=rb-4.0.3&auto=format&fit=crop&w=774&q=80" alt="Tech Lead">
+          </div>
+          <div class="member-info">
+            <h3 class="member-name">Alex Chen</h3>
+            <p class="member-role">Tech Lead</p>
+            <p class="member-desc">Overseeing all technical aspects and digital initiatives of the association.</p>
+            <div class="social-links">
+              <a href="#"><i class="fab fa-github"></i></a>
+              <a href="#"><i class="fab fa-twitter"></i></a>
+              <a href="#"><i class="fab fa-linkedin-in"></i></a>
+            </div>
+          </div>
+        </div>
+        
+        <div class="team-member">
+          <div class="member-img">
+            <img src="https://images.unsplash.com/photo-1580489944761-15a19d654956?ixlib=rb-4.0.3&auto=format&fit=crop&w=761&q=80" alt="Tech Co-Lead">
+          </div>
+          <div class="member-info">
+            <h3 class="member-name">Priya Patel</h3>
+            <p class="member-role">Tech Co-Lead</p>
+            <p class="member-desc">Assisting the tech lead and managing development projects.</p>
+            <div class="social-links">
+              <a href="#"><i class="fab fa-github"></i></a>
+              <a href="#"><i class="fab fa-twitter"></i></a>
+              <a href="#"><i class="fab fa-linkedin-in"></i></a>
+            </div>
+          </div>
+        </div>
+        
+        <div class="team-member">
+          <div class="member-img">
+            <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?ixlib=rb-4.0.3&auto=format&fit=crop&w=776&q=80" alt="Tech Assistant">
+          </div>
+          <div class="member-info">
+            <h3 class="member-name">Maria Rodriguez</h3>
+            <p class="member-role">Tech Assistant</p>
+            <p class="member-desc">Supporting the tech team with implementation and troubleshooting.</p>
+            <div class="social-links">
+              <a href="#"><i class="fab fa-github"></i></a>
+              <a href="#"><i class="fab fa-twitter"></i></a>
+              <a href="#"><i class="fab fa-linkedin-in"></i></a>
+            </div>
+          </div>
+        </div>
       </div>
-      <div class="container">
-        <div class="image"><img src="https://via.placeholder.com/350x500" alt=""></div>
-        <div class="content"><h3>Secretary</h3></div>
-        <ul class="media"><li><i class="fab fa-linkedin"></i></li></ul>
-        <div class="empty"></div>
+    </section>
+    
+    <!-- Cultural Team -->
+    <section class="team-category cultural-team">
+      <h2 class="category-title">Cultural Team</h2>
+      <div class="team-grid">
+        <div class="team-member">
+          <div class="member-img">
+            <img src="https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e?ixlib=rb-4.0.3&auto=format&fit=crop&w=774&q=80" alt="Cultural Lead">
+          </div>
+          <div class="member-info">
+            <h3 class="member-name">Emily Williams</h3>
+            <p class="member-role">Cultural Lead</p>
+            <p class="member-desc">Organizing cultural events and promoting artistic expression within the community.</p>
+            <div class="social-links">
+              <a href="#"><i class="fab fa-instagram"></i></a>
+              <a href="#"><i class="fab fa-twitter"></i></a>
+              <a href="#"><i class="fab fa-linkedin-in"></i></a>
+            </div>
+          </div>
+        </div>
+        
+        <div class="team-member">
+          <div class="member-img">
+            <img src="https://images.unsplash.com/photo-1544725176-7c40e5a71c5e?ixlib=rb-4.0.3&auto=format&fit=crop&w=776&q=80" alt="Cultural Co-Lead">
+          </div>
+          <div class="member-info">
+            <h3 class="member-name">David Kim</h3>
+            <p class="member-role">Cultural Co-Lead</p>
+            <p class="member-desc">Supporting cultural initiatives and event coordination.</p>
+            <div class="social-links">
+              <a href="#"><i class="fab fa-instagram"></i></a>
+              <a href="#"><i class="fab fa-twitter"></i></a>
+              <a href="#"><i class="fab fa-linkedin-in"></i></a>
+            </div>
+          </div>
+        </div>
+        
+        <div class="team-member">
+          <div class="member-img">
+            <img src="https://images.unsplash.com/photo-1517841905240-472988babdf9?ixlib=rb-4.0.3&auto=format&fit=crop&w=774&q=80" alt="Cultural Assistant">
+          </div>
+          <div class="member-info">
+            <h3 class="member-name">Sophia Lee</h3>
+            <p class="member-role">Cultural Assistant</p>
+            <p class="member-desc">Helping with logistics and participant coordination for cultural events.</p>
+            <div class="social-links">
+              <a href="#"><i class="fab fa-instagram"></i></a>
+              <a href="#"><i class="fab fa-twitter"></i></a>
+              <a href="#"><i class="fab fa-linkedin-in"></i></a>
+            </div>
+          </div>
+        </div>
       </div>
-    </div>
-  </section>
-
-  <!-- Technical Team -->
-  <section>
-    <h2>Technical Team</h2>
-    <div class="cards-wrapper">
-      <div class="container">
-        <div class="image"><img src="https://via.placeholder.com/350x500" alt=""></div>
-        <div class="content"><h3>Lead</h3></div>
-        <div class="empty"></div>
+    </section>
+    
+    <!-- Finance Team -->
+    <section class="team-category finance-team">
+      <h2 class="category-title">Finance Team</h2>
+      <div class="team-grid">
+        <div class="team-member">
+          <div class="member-img">
+            <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-4.0.3&auto=format&fit=crop&w=774&q=80" alt="Finance Lead">
+          </div>
+          <div class="member-info">
+            <h3 class="member-name">Robert Taylor</h3>
+            <p class="member-role">Finance Lead</p>
+            <p class="member-desc">Managing budgets and financial planning for the association.</p>
+            <div class="social-links">
+              <a href="#"><i class="fab fa-twitter"></i></a>
+              <a href="#"><i class="fab fa-linkedin-in"></i></a>
+            </div>
+          </div>
+        </div>
+        
+        <div class="team-member">
+          <div class="member-img">
+            <img src="https://images.unsplash.com/photo-1552058544-f2b08422138a?ixlib=rb-4.0.3&auto=format&fit=crop&w=798&q=80" alt="Finance Co-Lead">
+          </div>
+          <div class="member-info">
+            <h3 class="member-name">Jennifer Adams</h3>
+            <p class="member-role">Finance Co-Lead</p>
+            <p class="member-desc">Assisting with financial management and reporting.</p>
+            <div class="social-links">
+              <a href="#"><i class="fab fa-twitter"></i></a>
+              <a href="#"><i class="fab fa-linkedin-in"></i></a>
+            </div>
+          </div>
+        </div>
+        
+        <div class="team-member">
+          <div class="member-img">
+            <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?ixlib=rb-4.0.3&auto=format&fit=crop&w=776&q=80" alt="Finance Assistant">
+          </div>
+          <div class="member-info">
+            <h3 class="member-name">Lisa Anderson</h3>
+            <p class="member-role">Finance Assistant</p>
+            <p class="member-desc">Supporting day-to-day financial operations and record keeping.</p>
+            <div class="social-links">
+              <a href="#"><i class="fab fa-twitter"></i></a>
+              <a href="#"><i class="fab fa-linkedin-in"></i></a>
+            </div>
+          </div>
+        </div>
       </div>
-      <div class="container">
-        <div class="image"><img src="https://via.placeholder.com/350x500" alt=""></div>
-        <div class="content"><h3>Co-Lead</h3></div>
-        <div class="empty"></div>
+    </section>
+    
+    <!-- Media Team -->
+    <section class="team-category media-team">
+      <h2 class="category-title">Media Team</h2>
+      <div class="team-grid">
+        <div class="team-member">
+          <div class="member-img">
+            <img src="https://images.unsplash.com/photo-1552058544-f2b08422138a?ixlib=rb-4.0.3&auto=format&fit=crop&w=798&q=80" alt="Photography">
+          </div>
+          <div class="member-info">
+            <h3 class="member-name">Carlos Mendez</h3>
+            <p class="member-role">Photography</p>
+            <p class="member-desc">Capturing memorable moments at alumni events through photography.</p>
+            <div class="social-links">
+              <a href="#"><i class="fab fa-instagram"></i></a>
+              <a href="#"><i class="fab fa-twitter"></i></a>
+            </div>
+          </div>
+        </div>
+        
+        <div class="team-member">
+          <div class="member-img">
+            <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?ixlib=rb-4.0.3&auto=format&fit=crop&w=774&q=80" alt="Videography">
+          </div>
+          <div class="member-info">
+            <h3 class="member-name">James Wilson</h3>
+            <p class="member-role">Videography</p>
+            <p class="member-desc">Creating engaging video content to document and promote events.</p>
+            <div class="social-links">
+              <a href="#"><i class="fab fa-youtube"></i></a>
+              <a href="#"><i class="fab fa-instagram"></i></a>
+            </div>
+          </div>
+        </div>
+        
+        <div class="team-member">
+          <div class="member-img">
+            <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?ixlib=rb-4.0.3&auto=format&fit=crop&w=776&q=80" alt="Editography">
+          </div>
+          <div class="member-info">
+            <h3 class="member-name">Emma Thompson</h3>
+            <p class="member-role">Editography</p>
+            <p class="member-desc">Editing photos and videos to create compelling visual stories.</p>
+            <div class="social-links">
+              <a href="#"><i class="fab fa-behance"></i></a>
+              <a href="#"><i class="fab fa-instagram"></i></a>
+            </div>
+          </div>
+        </div>
+        
+        <div class="team-member">
+          <div class="member-img">
+            <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?ixlib=rb-4.0.3&auto=format&fit=crop&w=776&q=80" alt="Social Media Head">
+          </div>
+          <div class="member-info">
+            <h3 class="member-name">Olivia Martinez</h3>
+            <p class="member-role">Social Media Head</p>
+            <p class="member-desc">Managing social media presence and engagement strategies.</p>
+            <div class="social-links">
+              <a href="#"><i class="fab fa-instagram"></i></a>
+              <a href="#"><i class="fab fa-twitter"></i></a>
+              <a href="#"><i class="fab fa-facebook-f"></i></a>
+            </div>
+          </div>
+        </div>
       </div>
-    </div>
-  </section>
-
-  <!-- Finance Team -->
-  <section>
-    <h2>Finance Team</h2>
-    <div class="cards-wrapper">
-      <div class="container">
-        <div class="image"><img src="https://via.placeholder.com/350x500" alt=""></div>
-        <div class="content"><h3>Lead</h3></div>
-        <div class="empty"></div>
+    </section>
+    
+    <!-- Sponsor Team -->
+    <section class="team-category sponsor-team">
+      <h2 class="category-title">Sponsor Team</h2>
+      <div class="team-grid">
+        <div class="team-member">
+          <div class="member-img">
+            <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=774&q=80" alt="Sponsor Lead">
+          </div>
+          <div class="member-info">
+            <h3 class="member-name">Daniel Brown</h3>
+            <p class="member-role">Sponsor Lead</p>
+            <p class="member-desc">Leading sponsorship efforts and building partnerships with organizations.</p>
+            <div class="social-links">
+              <a href="#"><i class="fab fa-linkedin-in"></i></a>
+              <a href="#"><i class="fab fa-twitter"></i></a>
+            </div>
+          </div>
+        </div>
+        
+        <div class="team-member">
+          <div class="member-img">
+            <img src="https://images.unsplash.com/photo-1580489944761-15a19d654956?ixlib=rb-4.0.3&auto=format&fit=crop&w=761&q=80" alt="Sponsor Co-Lead">
+          </div>
+          <div class="member-info">
+            <h3 class="member-name">Aisha Khan</h3>
+            <p class="member-role">Sponsor Co-Lead</p>
+            <p class="member-desc">Assisting with sponsor relations and partnership development.</p>
+            <div class="social-links">
+              <a href="#"><i class="fab fa-linkedin-in"></i></a>
+              <a href="#"><i class="fab fa-twitter"></i></a>
+            </div>
+          </div>
+        </div>
+        
+        <div class="team-member">
+          <div class="member-img">
+            <img src="https://images.unsplash.com/photo-1517841905240-472988babdf9?ixlib=rb-4.0.3&auto=format&fit=crop&w=774&q=80" alt="Sponsor Assistant">
+          </div>
+          <div class="member-info">
+            <h3 class="member-name">Maya Patel</h3>
+            <p class="member-role">Sponsor Assistant</p>
+            <p class="member-desc">Supporting sponsor outreach and maintaining partnership records.</p>
+            <div class="social-links">
+              <a href="#"><i class="fab fa-linkedin-in"></i></a>
+              <a href="#"><i class="fab fa-twitter"></i></a>
+            </div>
+          </div>
+        </div>
       </div>
-      <div class="container">
-        <div class="image"><img src="https://via.placeholder.com/350x500" alt=""></div>
-        <div class="content"><h3>Co-Lead</h3></div>
-        <div class="empty"></div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Social Media Team -->
-  <section>
-    <h2>Social Media Team</h2>
-    <div class="cards-wrapper">
-      <div class="container">
-        <div class="image"><img src="https://via.placeholder.com/350x500" alt=""></div>
-        <div class="content"><h3>Lead</h3></div>
-        <div class="empty"></div>
-      </div>
-      <div class="container">
-        <div class="image"><img src="https://via.placeholder.com/350x500" alt=""></div>
-        <div class="content"><h3>Co-Lead</h3></div>
-        <div class="empty"></div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Join Us -->
- 
-  <!-- Footer Placeholder -->
-   <div class="footer-space">  <footer>
+    </section>
+  </div>
+  
+  <footer>
     <div class="footer-col">
       <h3><i class="fas fa-rocket"></i> Alumni Association</h3>
       <p>Alumni are not just former students, they are the living embodiment of an institution's achievements and values</p>
@@ -562,49 +892,58 @@
     <div class="footer-col">
       <h3>Quick Links</h3>
       <p><a href="index.html">Home</a></p>
-      <p><a href="#"></a></p>
       <p><a href="events.html">Events</a></p>
       <p><a href="schedule.html">Schedule</a></p>
       <p><a href="sponsors.html">Sponsors</a></p>
-      <p><a href="#"></a></p>
     </div>
     <div class="footer-col">
       <h3>Contact Us</h3>
-      <p><i class="fas fa-envelope"></i> alumnigoldenvalley@gmail.com</p>
-      <a href="tel:+919xxxxxxxx"><p><i class="fas fa-phone"></i> +91 89898989898</p></a>
+      <p><i class="fas fa-envelope"></i> sample@gmail.com</p>
+      <a href="tel:+918732016798"><p><i class="fas fa-phone"></i> +91 8732016798</p></a>
       <a href="https://maps.app.goo.gl/3qdrLz4HZDjSQ4gy6"><p><i class="fas fa-map-marker-alt"></i> PADMAPUR | DHARMANAGAR | TRIPURA</p></a>
-    </div>
-    <div class="footer-col">
-      <h3>Follow Us</h3>
-      <div class="social-icons">
-        <a href="#"><i class="fab fa-facebook fa-beat" style="color: #1a5eff;"></i></a>
-        <a href="https://www.youtube.com/@gvhsalumniofficial3726"><i class="fa-brands fa-youtube fa-beat" style="color: rgb(157, 5, 5);"></i></a>
-        <a href="#"><i class="fab fa-linkedin fa-beat" style="color: #23a4e9;"></i></a>
-        <a href="https://www.instagram.com/alumnigoldenvalley/"><i class="fab fa-instagram fa-beat" style="color: #fff;"></i></a>
-      </div>
-    </div>
-    <div class="footer-bottom">
-      ©Alumni Association GVHS. All rights reserved.
-    </div>
-  </footer></div>
-   <script src="https://cdn.botpress.cloud/webchat/v3.2/inject.js"></script>
-  <script src="https://files.bpcontent.cloud/2025/08/30/19/20250830190753-XP3BMBNB.js"></script>
+        </div>
+        <div class="footer-col">
+            <h3>Follow Us</h3>
+            <div class="social-icons">
+                <a href="https://www.facebook.com/gvhs.alumni/"><i class="fab fa-facebook fa-beat" style="color: #1a5eff;"></i></a>
+                <a href="https://www.youtube.com/@gvhsalumniofficial3726"><i class="fa-brands fa-youtube fa-beat" style="color: rgb(157, 5, 5);"></i></a>
+                <a href="https://www.linkedin.com/in/atanu-roy-ab1618339?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app"><i class="fab fa-linkedin fa-beat" style="color: #23a4e9;"></i></a>
+                <a href="https://www.instagram.com/alumnigoldenvalley/"><i class="fab fa-instagram fa-beat" style="color: #fff;"></i></a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            ©Alumni Association GVHS. 2025. All rights reserved.
+        </div>
+    </footer>
 
-  <!-- Script for Hamburger -->
-  <script>
-    const hamburger = document.querySelector('.hamburger');
-    const navLinks = document.querySelector('.nav-links');
-    hamburger.addEventListener('click', () => {
-      navLinks.classList.toggle('active');
+    <script src="https://cdn.botpress.cloud/webchat/v3.2/inject.js"></script>
+    <script src="https://files.bpcontent.cloud/2025/08/30/19/20250830190753-XP3BMBNB.js"></script>
+    <script>
+    // Hamburger menu
+    function toggleMenu(){ 
+      document.getElementById('navLinks').classList.toggle('active'); 
+    }
+
+    // Mobile dropdown toggle
+    function toggleDropdown(event, parent) {
+      if (window.innerWidth <= 768) {
+        event.preventDefault();
+        parent.classList.toggle('active');
+      }
+    }
+
+    // Close menu when clicking outside
+    document.addEventListener('click', function(event) {
+      const navLinks = document.getElementById('navLinks');
+      const hamburger = document.querySelector('.hamburger');
+      
+      if (window.innerWidth <= 768 && 
+          !navLinks.contains(event.target) && 
+          !hamburger.contains(event.target) &&
+          navLinks.classList.contains('active')) {
+        navLinks.classList.remove('active');
+      }
     });
-      function toggleDropdown(event, parent) {
-            if (window.innerWidth <= 768) {
-                event.preventDefault();
-                parent.classList.toggle('active');
-            }
-        }
-
-  </script>
-
+    </script>
 </body>
 </html>
