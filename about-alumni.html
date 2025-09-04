@@ -434,6 +434,19 @@
             font-size: 14px;
             width: 100%;
         }
+
+    .locked{
+      filter: blur(20px);
+      pointer-events: none;
+      user-select: none;
+    }
+    #login-message{
+      display: none;
+      text-align: center;
+      margin-top: 20px;
+      color: red;
+      font-weight: bold;
+    }
     /* Responsive Design */
     @media (max-width: 1200px) {
       .nav-links li:last-child {
@@ -594,6 +607,7 @@
         </ul>
     </nav>
   <!-- HERO -->
+<div id="protected-conten" class="locked">
   <header class="hero">
     <div class="container">
       <div>
@@ -751,6 +765,10 @@
             ©Alumni Association GVHS. All rights reserved.
         </div>
     </footer>
+    </div>
+    <div id="login-message">
+    Please log in to view. <a href="login.html">Login</a>
+    </div>
      <script src="https://cdn.botpress.cloud/webchat/v3.2/inject.js"></script>
     <script src="https://files.bpcontent.cloud/2025/08/30/19/20250830190753-XP3BMBNB.js"></script>
   <script>
@@ -791,6 +809,10 @@
       });
     }, {threshold:.15});
     revealEls.forEach(el=> io.observe(el));
+  </script>
+  <script type="module">
+    import {protectContent} from "./auth-project.js";
+    protectContent();
   </script>
 </body>
 </html>
