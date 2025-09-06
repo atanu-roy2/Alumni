@@ -712,18 +712,18 @@
                     <a href="about-us.html">About Team</a>
                 </div>
             </li>
-            <li><a href="events.html">Events</a></li>
-            <li><a href="schedule.html">Schedule</a></li>
-            <li><a href="sponsors.html">Sponsors</a></li>
+            <li><a href="events.html" class="protected">Events</a></li>
+            <li><a href="schedule.html" class="protected">Schedule</a></li>
+            <li><a href="sponsors.html" class="protected">Sponsors</a></li>
             <li>
                 <a href="#" onclick="toggleDropdown(event, this.parentNode)">Gallery</a>
                 <div class="dropdown-content">
-                    <a href="past-gallery.html">Past Events</a>
-                    <a href="ongoing-gallery.html">Current Event</a>
+                    <a href="past-gallery.html" class="protected">Past Events</a>
+                    <a href="ongoing-gallery.html" class="protected">Current Event</a>
                 </div>
             </li>
-            <li><a href="contact.html">Contact</a></li>
-            <li><a href="login.html"><button class="login-btn">Login</button></a></li>
+            <li><a href="contact.html" class="protected">Contact</a></li>
+            <li><a href="login.html"><button id="authBtn" class="login-btn">Login</button></a></li>
         </ul>
     </nav>
 
@@ -773,38 +773,60 @@
         <h2>Gallery</h2>
         <div class="gallery-grid">
             <div class="gallery-item">
-                <img src="https://images.unsplash.com/photo-1540575467063-178a50c2df87?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Event 1">
-                <div class="gallery-caption">Annual Meetup 2023</div>
+                <img src="https://res.cloudinary.com/ddc83vzoz/image/upload/v1757179229/WhatsApp_Image_2025-09-06_at_22.38.44_b004d1f9_eexybu.jpg" alt="Event 1">
+                <!-- <div class="gallery-caption">Independence Day Celebration</div> -->
             </div>
             <div class="gallery-item">
-                <img src="https://images.unsplash.com/photo-1533174072545-7a4b6ad7a6c3?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Event 2">
-                <div class="gallery-caption">Leadership Conference</div>
+                <img src="https://res.cloudinary.com/ddc83vzoz/image/upload/v1757179248/WhatsApp_Image_2025-09-06_at_22.39.33_67e5c78e_etsbxj.jpg" alt="Event 2">
+                <!-- <div class="gallery-caption">Leadership Conference</div> -->
             </div>
             <div class="gallery-item">
-                <img src="https://images.unsplash.com/photo-1511578314322-379afb476865?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Event 3">
-                <div class="gallery-caption">Charity Gala</div>
+                <img src="https://res.cloudinary.com/ddc83vzoz/image/upload/v1757179249/WhatsApp_Image_2025-09-06_at_22.39.35_84c1ecf7_ywz7l4.jpg" alt="Event 3">
+                <!-- <div class="gallery-caption">Human Pyramid</div> -->
             </div>
              <div class="gallery-item">
-                <img src="https://images.unsplash.com/photo-1533174072545-7a4b6ad7a6c3?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Event 2">
-                <div class="gallery-caption">Leadership Conference</div>
+                <img src="https://res.cloudinary.com/ddc83vzoz/image/upload/v1757179232/WhatsApp_Image_2025-09-06_at_22.39.12_1e5fc5c7_cqmozz.jpg" alt="Event 4">
+                <!-- <div class="gallery-caption">Leadership Conference</div> -->
             </div>
             <div class="gallery-item">
-                <img src="https://images.unsplash.com/photo-1492684223066-81342ee5ff30?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Event 4">
-                <div class="gallery-caption">Networking Night</div>
+                <img src="https://res.cloudinary.com/ddc83vzoz/image/upload/v1757179227/WhatsApp_Image_2025-09-06_at_22.38.39_533cc1c0_rfxqpb.jpg" alt="Event 5">
+                <!-- <div class="gallery-caption">Networking Night</div> -->
             </div>
             <div class="gallery-item">
-                <img src="https://images.unsplash.com/photo-1519741497674-611481863552?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Event 5">
-                <div class="gallery-caption">Career Fair</div>
+                <img src="https://res.cloudinary.com/ddc83vzoz/image/upload/v1757179227/WhatsApp_Image_2025-09-06_at_22.38.59_c6c8187c_hwqmp5.jpg" alt="Event 6">
+                <!-- <div class="gallery-caption">Career Fair</div> -->
             </div>
              <div class="gallery-item">
-                <img src="https://images.unsplash.com/photo-1533174072545-7a4b6ad7a6c3?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Event 2">
-                <div class="gallery-caption">Leadership Conference</div>
+                <img src="https://res.cloudinary.com/ddc83vzoz/image/upload/v1757179227/WhatsApp_Image_2025-09-06_at_22.38.59_80213c36_ozvuc6.jpg" alt="Event 7">
+                <!-- <div class="gallery-caption">Leadership Conference</div> -->
             </div>
             <div class="gallery-item">
-                <img src="https://images.unsplash.com/photo-1491438590914-bc09fcaaf77a?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Event 6">
-                <div class="gallery-caption">Alumni Dinner</div>
+                <img src="https://res.cloudinary.com/ddc83vzoz/image/upload/v1757179228/WhatsApp_Image_2025-09-06_at_22.38.44_a5c8dc62_zde2w6.jpg" alt="Event 8">
+                <!-- <div class="gallery-caption">Alumni Dinner</div> -->
             </div>
+            <div class="gallery-item">
+                <img src="https://res.cloudinary.com/ddc83vzoz/image/upload/v1757179229/WhatsApp_Image_2025-09-06_at_22.38.50_77598a28_nglako.jpg" alt="Event 9">
+                <!-- <div class="gallery-caption">Alumni Dinner</div> -->
+            </div>
+            <div class="gallery-item">
+                <img src="https://res.cloudinary.com/ddc83vzoz/image/upload/v1757179229/WhatsApp_Image_2025-09-06_at_22.38.46_276ecc9a_p0fsxp.jpg" alt="Event 10">
+                <!-- <div class="gallery-caption">Alumni Dinner</div> -->
+            </div>
+            <div class="gallery-item">
+                <img src="https://res.cloudinary.com/ddc83vzoz/image/upload/v1757179227/WhatsApp_Image_2025-09-06_at_22.38.58_939d0842_lvkib3.jpg" alt="Event 11">
+                <!-- <div class="gallery-caption">Alumni Dinner</div> -->
+            </div>
+            <div class="gallery-item">
+                <img src="https://res.cloudinary.com/ddc83vzoz/image/upload/v1757179225/WhatsApp_Image_2025-09-06_at_22.38.54_266ffc41_z6dtr2.jpg" alt="Event 12">
+                <!-- <div class="gallery-caption">Alumni Dinner</div> -->
+            </div>
+             </div>
+             </div>
+             </div>
+             </div>
+            
         </div>
+
     </section>
 
     <!-- Creative Contact Section -->
@@ -957,6 +979,12 @@
         }, { threshold: 0.5 });
 
         observer.observe(document.querySelector('.stats-container'));
+
+        
+
+        
     </script>
+
+   
 </body>
 </html>
