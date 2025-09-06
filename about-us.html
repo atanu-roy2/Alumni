@@ -610,6 +610,14 @@
                 /* --- FIX: USE THE DEDICATED MOBILE ANIMATION --- */
                 animation-name: continuous-rotate-mobile;
             }
+            @keyframes continuous-rotate-mobile {
+               from {
+                transform: scale(0.8) rotate(0deg);
+            }
+            to {
+                transform: scale(0.8) rotate(360deg);
+            }
+            }
             .page-title { font-size: 1.8rem; }
             .category-title { font-size: 1.6rem; }
             .team-category { padding: 20px 15px; }
