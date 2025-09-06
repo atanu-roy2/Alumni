@@ -80,38 +80,25 @@
     const app = initializeApp(firebaseConfig);
     const auth = getAuth(app);
 
-     // Google Login
-        googleLoginBtn.addEventListener("click", () => {
-            const provider = new GoogleAuthProvider();
-            signInWithPopup(auth, provider)
-                .then((result) => {
-                    // This will be handled by onAuthStateChanged
-                    console.log("Google sign-in successful for:", result.user.email);
-                })
-                .catch((error) => {
-                    console.error("Google Login Error:", error);
-                    let friendlyMessage = `An unknown error occurred. (Code: ${error.code})`;
-                    // Provide specific, helpful messages for common errors.
-                    switch (error.code) {
-                        case 'auth/popup-blocked-by-browser':
-                            friendlyMessage = "Login pop-up was blocked by your browser. Please allow pop-ups for this site and try again.";
-                            break;
-                        case 'auth/popup-closed-by-user':
-                            friendlyMessage = "Login was cancelled because you closed the pop-up window. Please try again.";
-                            break;
-                        case 'auth/unauthorized-domain':
-                            friendlyMessage = "This app's domain is not authorized for login. The app owner needs to add it to the Firebase Console's authorized domains list.";
-                            break;
-                        case 'auth/cancelled-popup-request':
-                             friendlyMessage = "Login cancelled. Only one login pop-up can be open at a time.";
-                             break;
-                        default:
-                             friendlyMessage = `Login failed: ${error.message}`;
-                    }
-                    showMessage('auth-message', friendlyMessage, true);
-                });
-        });
+ 
+    
+    const provider = new GoogleAuthProvider();
 
+    // ✅ 1. Google Login Handler
+    // This is attached ONLY to the Google Button.
+    document.getElementById("googleLoginBtn").addEventListener("click", (e) => {
+      e.preventDefault(); // Stop any form submission behavior
+      signInWithPopup(auth, provider)
+        .then((result) => {
+          const user = result.user;
+          alert("Welcome " + user.displayName + " (" + user.email + ")");
+          window.location.href = "index.html"; // redirect to home
+        })
+        .catch((error) => {
+          console.error(error);
+          alert("❌ Google Login Error: " + error.message);
+        });
+    });
 
     // ✅ Email/Password Login
     document.getElementById("loginForm").addEventListener("submit", (e) => {
