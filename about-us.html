@@ -604,10 +604,11 @@
       }
     }
 
+      
         @media (max-width: 576px) {
             .circle-wrapper {
-                transform: scale(0.6);
-                animation: none; /* Disable rotation on small screens */
+                /* --- FIX: USE THE DEDICATED MOBILE ANIMATION --- */
+                animation-name: continuous-rotate-mobile;
             }
             .page-title { font-size: 1.8rem; }
             .category-title { font-size: 1.6rem; }
